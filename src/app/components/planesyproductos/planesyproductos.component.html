@@ -1,0 +1,17 @@
+<div>
+
+    <div class="plan" *ngFor="let product of planes">
+        <div class="item">
+            <img src="assets/imgDivisas/Venezuela.png" alt="">
+            <div id="name">
+                {{product.name}}
+            </div>
+            <div id="price">
+                {{product.price}}
+            </div>
+            <a routerLink="/dashboard/planes/all">
+                <button class="btn btn-sm btn-outline-success">Comprar</button>
+            </a>
+        </div>
+    </div>
+</div>

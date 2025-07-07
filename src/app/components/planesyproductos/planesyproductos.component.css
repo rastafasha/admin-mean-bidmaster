@@ -1,0 +1,54 @@
+.planes {
+    display: flex;
+    border: 1px solid #fff;
+    margin: 5px 0px;
+    border-radius: 12px;
+    background-color: #f2f2f2;
+    box-shadow: 0px 3px 6px #ccc;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.planes :nth-child(1) {
+    display: flex;
+}
+
+.planes :nth-child(2),
+.planes :nth-child(3),
+.planes :nth-child(4) {
+    border-left: 1px solid #fff;
+    padding: 5px;
+}
+
+.planes img {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    border-radius: 100px;
+    margin: 5px;
+    align-items: center;
+    align-self: center;
+}
+
+.plan {
+    display: flex;
+    float: left;
+}
+
+.plan .card-img-top {
+    width: 90px;
+    height: 90px;
+    align-self: center;
+    padding-top: 10px;
+}
+
+.plan .item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fafafa;
+    align-items: end;
+}

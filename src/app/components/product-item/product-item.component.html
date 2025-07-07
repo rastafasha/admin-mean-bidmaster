@@ -1,0 +1,24 @@
+<div class="card text-center mb-3 itemproduct">
+
+    <div class="db-wrapper">
+        <div class="db-pricing-eleven" [style.background]="product.color">
+            <div class="price">
+                <div *ngIf="product.price ">
+                    <sup>$</sup>{{product.price}}
+                </div>
+                <div *ngIf="!product.price ">
+                    <small>Gratis (sólo registrate)</small>
+                </div>
+                <small>{{product.tiempo}}</small>
+            </div>
+            <div class="type">
+                {{product.name}}
+            </div>
+            <div [innerHtml]="product.adicional | safe: 'html'" class="description"></div>
+            <div class="pricing-footer">
+
+                <button href="#" class="btn btn-outline-success" (click)="addToCart()"> <i class="fa fa-cart"></i> add to cart</button>
+            </div>
+        </div>
+    </div>
+</div>
