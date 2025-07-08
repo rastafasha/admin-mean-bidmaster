@@ -1,1 +1,72 @@
-<p>project-edit works!</p>
+<div class="modal fade" id="editProject" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="projectModalLabel">{{title}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+
+                    <form class="form-horizontal form-material" (ngSubmit)="handleSubmit()" [formGroup]="projectForm">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <label>Nombre del Proyecto <span class="required">*</span></label>
+                                <input type="text" formControlName="name" class="form-control" required>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>URL del Proyecto<span class="required">*</span></label>
+                                <input type="text" formControlName="url" class="form-control" required>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>Subir PDF<span class="required">*</span></label>
+                                <input type="text" formControlName="file" class="form-control" required>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>Tipo de Proyecto<span class="required">*</span></label>
+                                <input type="text" formControlName="type" class="form-control" required>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>category<span class="required">*</span></label>
+                                <input type="text" formControlName="category" class="form-control" required>
+
+                            </div>
+                       
+                            <div class="col-xs-12 col-md-6">
+                                <label>Fecha de entrga<span class="required">*</span></label>
+                                <input type="date" formControlName="deliveryDate" class="form-control" required>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>Asociados<span class="required">*</span></label>
+                                <input type="text" formControlName="partners" class="form-control" required>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>¿Tiene presentación lista para enviar?<span class="required">*</span></label>
+                                <input type="text" formControlName="hasPresentation" class="form-control" required>
+
+                            </div>
+
+                        </div>
+
+                        <input type="hidden" formControlName="id">
+                        <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit"
+                            (click)="handleSubmit()">Guardar</button>
+
+
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

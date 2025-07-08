@@ -5,10 +5,12 @@ export class Project {
     name:string;
 url:string;
 type:ProjectType;
+category:string;
 hasPresentation:string;
 deliveryDate:string;
 date:string;
 partners:User;
+file:string;
 
 }
 

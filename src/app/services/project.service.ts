@@ -40,7 +40,7 @@ export class ProjectService {
         )
     }
   
-    getProject(_id: Project) {
+    getProject(_id: string) {
       const url = `${baseUrl}/projects/${_id}`;
       return this.http.get<any>(url, this.headers)
         .pipe(
