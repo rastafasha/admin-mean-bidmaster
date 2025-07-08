@@ -41,7 +41,7 @@
 
                                 <span class="badge bg-dark-light" *ngIf="user.role === 'SUPERADMIN'">SuperAdmin</span>
                                 <span class="badge bg-primary" *ngIf="user.role === 'ADMIN'">Admin</span>
-                                <span class="badge bg-success" *ngIf="user.role === 'EDITOR'">Editor</span>
+                                <span class="badge bg-success" *ngIf="user.role === 'PARTNER'">PARTNER</span>
                                 <span class="badge bg-success" *ngIf="user.role === 'MEMBER'">Miembro</span>
                                 <span class="badge bg-secondary" *ngIf="user.role === 'USER'">Invitado</span>
                             </div>
@@ -68,7 +68,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link "
-                                        *ngIf="usuario.role === 'EDITOR'|| usuario.role === 'SUPERADMIN' || usuario.role === 'ADMIN'"
+                                        *ngIf="usuario.role === 'PARTNER'|| usuario.role === 'SUPERADMIN' || usuario.role === 'ADMIN'"
                                         data-bs-toggle="tab" data-bs-target="#blogs">Mis Blogs Creados</button>
                                 </li>
                                 <!-- <li class="nav-item">
@@ -137,7 +137,7 @@
                                                 <br>
 
                                                 <div class="col-xs-12"
-                                                    *ngIf="user.role == 'EDITOR' || user.role == 'SUPERADMIN' || user.role == 'ADMIN'">
+                                                    *ngIf="user.role == 'PARTNER' || user.role == 'SUPERADMIN' || user.role == 'ADMIN'">
                                                     <h4>Tipos de Pago</h4>
                                                     <div class="col-xs-12 col-md-6">
                                                         <label for="exampleInputEmail1">Email Paypal </label>

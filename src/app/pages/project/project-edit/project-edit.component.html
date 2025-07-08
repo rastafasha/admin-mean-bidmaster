@@ -25,8 +25,9 @@
                                 <input type="file" class="cz-file-drop-input" (change)="cambiarImagen($event)">
                                 <br>
                                 <br>
-                                <button type="button" [disabled]="!imagenSubir" (click)="subirImagen()" class="btn btn-success waves-effect waves-light m-r-10 ">
-                                  <i class="fa fa-save"></i> Cambiar imagen
+                                <button type="button" [disabled]="!imagenSubir" (click)="subirImagen()"
+                                    class="btn btn-success waves-effect waves-light m-r-10 ">
+                                    <i class="fa fa-save"></i> Cambiar imagen
                                 </button>
 
                             </div>
@@ -36,7 +37,7 @@
                                 <div class="input-group">
 
                                     <select class="form-control" formControlName="type">
-                                    
+
                                         <option *ngFor="let data of categorias" [value]="data.name">
                                             {{data.name}}
                                         </option>
@@ -45,6 +46,7 @@
                                 </div>
                             </div>
 
+
                             <div class="col-xs-12 col-md-6">
                                 <label>Fecha de entrga<span class="required">*</span></label>
                                 <input type="date" formControlName="deliveryDate" class="form-control" required>
@@ -52,13 +54,30 @@
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <label>Asociados<span class="required">*</span></label>
-                                <input type="text" formControlName="partners" class="form-control" required>
+                                <!-- <input type="text" formControlName="partners" class="form-control" required> -->
+                                <div class="input-group">
 
+                                    <ng-container formArrayName="partners" *ngIf="partners && partners.length > 0">
+                                        <div *ngFor="let partnerCtrl of projectForm.get('partners').controls; let i = index"
+                                            class="form-check">
+                                            <input class="form-check-input" type="checkbox" [formControlName]="i"
+                                                [id]="'partnerCheckbox' + i" [value]="partners[i].username" />
+                                            <label class="form-check-label" [for]="'partnerCheckbox' + i">{{
+                                                partners[i].username }}</label>
+                                        </div>
+                                    </ng-container>
+
+                                </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <label>¿Tiene presentación lista para enviar?<span class="required">*</span></label>
-                                <input type="text" formControlName="hasPresentation" class="form-control" required>
-
+                                <!-- <label>¿Tiene presentación lista para enviar?<span class="required">*</span></label> -->
+                                <!-- <input type="text" formControlName="hasPresentation" class="form-control" required> -->
+                                <div class="form-check">
+                                    <input class="form-check-input" formControlName="hasPresentation" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        ¿Tiene presentación lista para enviar?
+                                    </label>
+                                    </div>
                             </div>
 
                         </div>

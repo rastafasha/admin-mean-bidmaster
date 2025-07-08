@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Project, ProjectType } from 'src/app/models/project';
 import { User } from 'src/app/models/user';
@@ -23,6 +23,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
   projectForm:FormGroup;
   title:string;
   usuario:User;
+  partners:User[];
   project: Project;
   id:string;
   categorias : ProjectType;
@@ -51,6 +52,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['projectSeleccionado'] && changes['projectSeleccionado'].currentValue) {
       const project = changes['projectSeleccionado'].currentValue;
+      this.setPartnersFormArray(project.partners);
       this.projectForm.patchValue({
         id: project._id,
         name: project.name,
@@ -59,7 +61,6 @@ export class ProjectEditComponent implements OnInit, OnChanges {
         hasPresentation: project.hasPresentation,
         type: project.type,
         deliveryDate: project.deliveryDate,
-        partners: project.partners,
         file: project.file,
       });
       this.title = 'Editando Categoría';
@@ -68,7 +69,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
 
   getCategorias(){
     this.projectTypeService.getProjectTypes().subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
       this.categorias = resp;
     })
 
@@ -76,8 +77,21 @@ export class ProjectEditComponent implements OnInit, OnChanges {
 
   getPartners(){
     this.usuarioService.getAllEditors().subscribe((resp:any)=>{
-      console.log(resp);
+      // console.log(resp);
+      this.partners = resp;
+      this.setPartnersFormArray([]);
     })
+  }
+
+  setPartnersFormArray(selectedPartners: string[]) {
+    const partnersFormArray = this.fb.array([]);
+    if (this.partners && this.partners.length > 0) {
+      this.partners.forEach(partner => {
+        const isSelected = selectedPartners.includes(partner.uid);
+        partnersFormArray.push(new FormControl(isSelected));
+      });
+    }
+    this.projectForm.setControl('partners', partnersFormArray);
   }
 
   cambiarImagen(event: Event) {
@@ -109,14 +123,14 @@ export class ProjectEditComponent implements OnInit, OnChanges {
 
    
   
-    validarFormulario(){
+  validarFormulario(){
       this.projectForm = this.fb.group({
         name: ['',Validators.required],
         url: ['',Validators.required],
         category: ['',Validators.required],
         hasPresentation: ['',Validators.required],
         deliveryDate: ['',Validators.required],
-        partners: ['',Validators.required],
+        partners: this.fb.array([], Validators.required),
         type: ['',Validators.required],
         file: ['',Validators.required],
         id: ['',Validators.required],
@@ -149,14 +163,24 @@ export class ProjectEditComponent implements OnInit, OnChanges {
   
     }
   
-    handleSubmit(){
-  
-      const {nombre } = this.projectForm.value;
-  
+  handleSubmit(){
+
+      const {nombre, partners } = this.projectForm.value;
+
+      // Extract selected partner IDs from the FormArray
+      const selectedPartners = this.projectForm.value.partners
+        .map((checked, i) => checked ? this.partners[i].uid : null)
+        .filter(v => v !== null);
+
+      const dataToSend = {
+        ...this.projectForm.value,
+        partners: selectedPartners,
+      };
+
       if(this.projectSeleccionado){
         //actualizar
         const data = {
-          ...this.projectForm.value,
+          ...dataToSend,
           _id: this.projectSeleccionado._id
         }
         this.projectService.updateProject(data).subscribe(
@@ -165,17 +189,17 @@ export class ProjectEditComponent implements OnInit, OnChanges {
             // this.router.navigateByUrl(`/dashboard/projects`);
             console.log(this.projectSeleccionado);
           });
-  
+
       }else{
         //crear
-        this.projectService.createProject(this.projectForm.value)
+        this.projectService.createProject(dataToSend)
         .subscribe( (resp: any) =>{
           Swal.fire('Creado', `${nombre} creado correctamente`, 'success');
           // this.router.navigateByUrl(`/dashboard/categories`);
           // this.enviarNotificacion();
         })
       }
-  
+
     }
   
   

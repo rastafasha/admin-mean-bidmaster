@@ -13,7 +13,7 @@ export class ProjectitemComponent implements OnInit {
 
   @Output() onTogglePresentation = new EventEmitter<string>();
   @Output() onEdit = new EventEmitter<string>();
-  @Output() onDelete = new EventEmitter<string>();
+  @Output() onDelete = new EventEmitter<Project>();
   @Output() onEditProject = new EventEmitter<Project>();
   @Output() selectedProject: Project;
 
@@ -30,7 +30,7 @@ export class ProjectitemComponent implements OnInit {
   }
 
   deleteProject() {
-    this.onDelete.emit(this.project._id);
+    this.onDelete.emit(this.project);
 
   }
 
