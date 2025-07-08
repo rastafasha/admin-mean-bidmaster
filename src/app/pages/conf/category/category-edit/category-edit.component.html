@@ -31,14 +31,15 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title" *ngIf="categorySeleccionado">{{title}}: {{planSeleccionado.name}}</h4>
+                            <!-- {{planSeleccionado.name}} -->
+                            <h4 class="card-title" *ngIf="categorySeleccionado">{{title}}: </h4>
                             <h4 class="card-title" *ngIf="!categorySeleccionado">{{title}}</h4>
                             <form class="form p-t-20 form-horizontal form-material" [formGroup]="categoryForm" (submit)="updateCategory()">
                                 <div class="form-group" style="margin-bottom: 25px;">
                                     <label for="exampleInputuname">Nombre<span class="required">*</span></label>
                                     <div class="input-group">
 
-                                        <input type="text" formControlName="nombre" class="form-control" id="exampleInputuname" placeholder="Nombre" required>
+                                        <input type="text" formControlName="name" class="form-control" id="exampleInputuname" placeholder="Nombre" required>
                                     </div>
                                 </div>
                                 <button type="submit" [disabled]="categoryForm.invalid" class="btn btn-success waves-effect waves-light m-r-10 btn-block">
@@ -70,7 +71,7 @@
                                     </thead>
                                     <tbody *ngFor="let item of categories">
                                         <tr>
-                                            <td style="font-size: 13px;">{{item.nombre}}</td>
+                                            <td style="font-size: 13px;">{{item.name}}</td>
                                             <td class="text-center">
                                                 <a class="nav-link-style text-danger" data-toggle="modal" [attr.data-target]="'#delete-'+item._id" style="cursor:pointer">
                                                     <div class="czi-trash"></div>

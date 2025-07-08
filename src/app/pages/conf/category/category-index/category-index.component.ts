@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 //Services
 import { HttpBackend, HttpClient, HttpHandler } from '@angular/common/http';
@@ -9,6 +9,8 @@ import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 import Swal from 'sweetalert2';
 import { BusquedasService } from 'src/app/services/busqueda.service';
+import { ProjectType } from 'src/app/models/project';
+import { ProjecttypeService } from 'src/app/services/projecttype.service';
 
 
 @Component({
@@ -18,9 +20,9 @@ import { BusquedasService } from 'src/app/services/busqueda.service';
 })
 export class CategoryIndexComponent implements OnInit {
 
-
+  @Input() displaycomponent: string = 'block';
   title = "Categorias"
-  categorias: Category;
+  categorias: ProjectType;
   user: User;
   p: number = 1;
   count: number = 8;
@@ -33,7 +35,7 @@ export class CategoryIndexComponent implements OnInit {
   constructor(
     private location: Location,
     private http: HttpClient,
-    private categoryService: CategoryService,
+    private projectTypeService: ProjecttypeService,
     handler: HttpBackend,
     private busquedasService: BusquedasService,
 
@@ -53,7 +55,7 @@ export class CategoryIndexComponent implements OnInit {
   }
 
   getCurrencies(): void {
-    this.categoryService.getCategories().subscribe(
+    this.projectTypeService.getProjects().subscribe(
       res =>{
         this.categorias = res;
         error => this.error = error
@@ -72,7 +74,7 @@ export class CategoryIndexComponent implements OnInit {
       confirmButtonText: 'Si, Borrar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.categoryService.deleteCategory(_id).subscribe(
+        this.projectTypeService.deleteProject(_id).subscribe(
           response =>{
             this.getCurrencies();
           }

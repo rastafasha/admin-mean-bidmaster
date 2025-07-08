@@ -2,7 +2,7 @@
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
     <div class="col-xs-12">
-        <div class="leftside">
+        <div class="leftside" [style.displaycomponentcss]="displaycomponent">
             <!-- Page Title -->
             <div class="pagetitle">
                 <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
@@ -70,7 +70,7 @@
                             <tbody>
                                 <tr *ngFor="let category of categorias |  paginate: { itemsPerPage: count, currentPage: p }">
 
-                                    <td>{{category.nombre}}</td>
+                                    <td>{{category.name}}</td>
                                     <td>{{category.createdAt | date:'MMM d, y, h:mm:ss a'}} </td>
 
                                     <td class="text-nowrap text-center">

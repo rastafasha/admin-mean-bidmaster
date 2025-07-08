@@ -63,10 +63,10 @@
                     <div class="card shadow-sm ">
                         <div class="card-body">
                             <h4 class="card-title">Projectos</h4>
-                            <div class="alert alert-info" *ngIf="!categorias">
+                            <div class="alert alert-info" *ngIf="!projects">
                                 <p class="mb-0"> No hay Projectos con ese término</p>
                             </div>
-                            <div class="table-responsive" *ngIf="categorias">
+                            <div class="table-responsive" *ngIf="projects">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -76,7 +76,7 @@
                                     <tbody>
                                         <tr *ngFor="let categoria of categorias" class="animated fadeIn fast">
                                             
-                                            <td><a [routerLink]="['/dashboard/category/edit', categoria._id]">{{categoria.nombre}}</a></td>
+                                            <td><a [routerLink]="['/dashboard/category/edit', categoria._id]">{{categoria.name}}</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -89,10 +89,10 @@
                     <div class="card shadow-sm ">
                         <div class="card-body">
                             <h4 class="card-title">Categorias</h4>
-                            <div class="alert alert-info" *ngIf="!categorias">
+                            <div class="alert alert-info" *ngIf="!projecttypes">
                                 <p class="mb-0"> No hay categorias con ese termino</p>
                             </div>
-                            <div class="table-responsive" *ngIf="categorias">
+                            <div class="table-responsive" *ngIf="projecttypes">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -102,7 +102,7 @@
                                     <tbody>
                                         <tr *ngFor="let categoria of categorias" class="animated fadeIn fast">
                                             
-                                            <td><a [routerLink]="['/dashboard/category/edit', categoria._id]">{{categoria.nombre}}</a></td>
+                                            <td><a [routerLink]="['/dashboard/category/edit', categoria._id]">{{categoria.name}}</a></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -82,6 +82,10 @@ img.avatar {
     cursor: pointer;
 }
 
+.displaycomponentcss{
+    display: none;
+}
+
 .profile .profile-card .social-links a {
     color: var(--azul);
 }

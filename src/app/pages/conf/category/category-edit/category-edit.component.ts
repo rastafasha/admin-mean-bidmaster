@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
 
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import { Category } from 'src/app/models/category';
-import { CategoryService } from 'src/app/services/category.service';
+import { ProjectType } from 'src/app/models/project';
+import { ProjecttypeService } from 'src/app/services/projecttype.service';
 
 @Component({
   selector: 'app-category-edit',
@@ -21,16 +21,16 @@ export class CategoryEditComponent implements OnInit {
   title : string;
 
   public categoryForm: FormGroup;
-  public category: Category;
+  public category: ProjectType;
   public usuario: User;
-  categories: Category;
+  categories: ProjectType;
   error: string;
 
   idcategory:any;
 
   public msm_error = '';
 
-  public categorySeleccionado: Category;
+  public categorySeleccionado: ProjectType;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +38,7 @@ export class CategoryEditComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private location: Location,
-    private categoryService: CategoryService,
+    private projectTypeService: ProjecttypeService,
   ) {
     this.usuario = usuarioService.usuario;
     const base_url = environment.apiUrl;
@@ -62,18 +62,18 @@ export class CategoryEditComponent implements OnInit {
 
   validarFormulario(){
     this.categoryForm = this.fb.group({
-      nombre: ['',Validators.required],
+      name: ['',Validators.required],
     })
   }
 
   cargarCategory(_id: string){
     if (_id !== null && _id !== undefined) {
       this.title = 'Editando Categoría';
-      this.categoryService.getCategory(_id).subscribe(
-        res => {
+      this.projectTypeService.getProject(_id).subscribe(
+        (res:any) => {
           this.categoryForm.patchValue({
             id: res._id,
-            nombre: res.nombre,
+            name: res.name,
           });
           this.categorySeleccionado = res;
           console.log(this.categorySeleccionado);
@@ -87,7 +87,7 @@ export class CategoryEditComponent implements OnInit {
 
   updateCategory(){
 
-    const {nombre } = this.categoryForm.value;
+    const {name } = this.categoryForm.value;
 
     if(this.categorySeleccionado){
       //actualizar
@@ -95,18 +95,18 @@ export class CategoryEditComponent implements OnInit {
         ...this.categoryForm.value,
         _id: this.categorySeleccionado._id
       }
-      this.categoryService.updateCategory(data).subscribe(
+      this.projectTypeService.updateProject(data).subscribe(
         resp =>{
-          Swal.fire('Actualizado', `${nombre}  actualizado correctamente`, 'success');
+          Swal.fire('Actualizado', `${name}  actualizado correctamente`, 'success');
           this.router.navigateByUrl(`/dashboard/categories`);
           console.log(this.categorySeleccionado);
         });
 
     }else{
       //crear
-      this.categoryService.createCategory(this.categoryForm.value)
+      this.projectTypeService.createProject(this.categoryForm.value)
       .subscribe( (resp: any) =>{
-        Swal.fire('Creado', `${nombre} creado correctamente`, 'success');
+        Swal.fire('Creado', `${name} creado correctamente`, 'success');
         this.router.navigateByUrl(`/dashboard/categories`);
         // this.enviarNotificacion();
       })
@@ -123,8 +123,8 @@ export class CategoryEditComponent implements OnInit {
   }
 
   getCategories(): void {
-    this.categoryService.getCategories().subscribe(
-      res =>{
+    this.projectTypeService.getProjects().subscribe(
+      (res:any) =>{
         this.categories = res;
         error => this.error = error
       }

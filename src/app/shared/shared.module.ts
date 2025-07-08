@@ -18,6 +18,7 @@ import { PipesModule } from '../pipes/pipes.module';
 //paypal
 import { SearchComponent } from './search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -27,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     CommonModule,
     PipesModule,
+    FormsModule
     // NgxPaginationModule,
 
 ],
@@ -36,7 +38,8 @@ declarations: [
     FooterComponent,
     MenuiconosComponent,
     BannerplanesComponent,
-    SearchComponent
+    SearchComponent,
+    LoadingComponent
 ],
 exports: [
     HeaderComponent,
@@ -46,7 +49,8 @@ exports: [
     BannerplanesComponent,
     SearchComponent,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    LoadingComponent
 ]
 })
 export class SharedModule { }

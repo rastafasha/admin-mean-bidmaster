@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user';
 import { BusquedasService } from 'src/app/services/busqueda.service';
 
 import { Location } from '@angular/common';
+import { Project, ProjectType } from 'src/app/models/project';
 
 @Component({
   selector: 'app-busqueda',
@@ -15,7 +16,8 @@ export class BusquedaComponent implements OnInit {
 
   
 
-  categorias: Category;
+  projects: Project;
+  projecttypes: ProjectType;
   usuarios: User;
 
   query:string ='';
@@ -39,7 +41,8 @@ export class BusquedaComponent implements OnInit {
     this.busquedasService.searchGlobal(termino).subscribe(
       (resp:any) => {
         this.usuarios = resp.usuarios;
-        this.categorias = resp.categorias;
+        this.projects = resp.projects;
+        this.projecttypes = resp.projecttypes;
       }
     )
   }
@@ -52,9 +55,10 @@ export class BusquedaComponent implements OnInit {
       return this.busquedasService.searchGlobal(this.query).subscribe(
         (resp:any) => {
           this.usuarios = resp.usuarios;
-        this.categorias = resp.categorias;
+          this.projects = resp.projects;
+          this.projecttypes = resp.projecttypes;
       
-          
+          console.log(resp);
         }
       )
     }

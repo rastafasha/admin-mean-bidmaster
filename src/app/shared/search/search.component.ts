@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { BusquedasService } from 'src/app/services/busqueda.service';
 import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 
@@ -23,6 +24,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private busquedasService: BusquedasService,
   ) {
   }
 
@@ -38,13 +40,20 @@ export class SearchComponent implements OnInit {
 
 
    search() {
-    // return this.directorioService.search(this.query).subscribe(
-    //   (res:any)=>{
-    //     this.directories = res;
-    //     if(!this.query){
-    //       this.getDirectories();
-    //     }
-    //   });
+      if(!this.query|| this.query === null){
+      this.ngOnInit();
+    }else{
+      return this.busquedasService.searchGlobal(this.query).subscribe(
+        (resp:any) => {
+          // this.usuarios = resp.usuarios;
+          // this.projects = resp.projects;
+          // this.projecttypes = resp.projecttypes;
+      
+          console.log(resp);
+        }
+      )
+    }
+    
   }
 
 

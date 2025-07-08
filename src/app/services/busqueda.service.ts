@@ -4,8 +4,8 @@ import { environment } from '../../environments/environment';
 
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
-import { Category } from '../models/category';
 import { Project } from '../models/project';
+import { ProjectType } from '../models/project';
 
 const base_url = environment.apiUrl;
 
@@ -43,14 +43,14 @@ export class BusquedasService {
   }
 
   
-  private trasnformarCategorias(resultados: any[]): Category[] {
+  private trasnformarCategorias(resultados: any[]): ProjectType[] {
     return resultados;
   }
   private trasnformarProjects(resultados: any[]): Project[] {
     return resultados;
   }
 
-  buscar(tipo: 'usuarios' | 'projects' | 'categorias', termino: string) {
+  buscar(tipo: 'usuarios' | 'projecttypes' | 'projects', termino: string) {
     const url = `${base_url}/todo/coleccion/${tipo}/${termino}`;
     return this.http.get<any[]>(url, this.headers).pipe(
       map((resp: any) => {
@@ -58,9 +58,9 @@ export class BusquedasService {
           case 'usuarios':
             return this.trasnformarUsuarios(resp.resultados);
 
-          case 'projects':
+          case 'projecttypes':
             return this.trasnformarProjects(resp.resultados);
-          case 'categorias':
+          case 'projecttypes':
             return this.trasnformarCategorias(resp.resultados);
 
           default:

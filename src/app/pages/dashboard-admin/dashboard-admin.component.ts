@@ -18,7 +18,8 @@ export class DashboardAdminComponent implements OnInit {
   title = 'Panel Administrativo';
   public user: User;
   public profile: User;
-  display: string = 'none'
+  displaycomponent: string = 'none';
+  limit = 3;
 
   error: string;
   uid:string;
