@@ -8,7 +8,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a routerLink="/"><i class="fa fa-home"></i> Inicio</a></li>
-                    <li class="breadcrumb-item active" *ngIf="user.role === 'EDITOR'"> Editor</li>
+                    <li class="breadcrumb-item active" *ngIf="user.role === 'PARTNER'"> Socio</li>
                     <li class="breadcrumb-item active" *ngIf="user.role === 'USER'"> Invitado</li>
                 </ol>
             </nav>
@@ -16,7 +16,7 @@
         <div class="right shadow animated fadeIn">
 
             <p>Bienvenido: </p>
-            <span class="badge bg-success" *ngIf="user.role === 'EDITOR'">Editor</span>
+            <span class="badge bg-success" *ngIf="user.role === 'PARTNER'">Socio</span>
             <span class="badge bg-danger" *ngIf="user.role === 'USER'">Invitado</span>
         </div>
     </div>
@@ -107,7 +107,7 @@
                                     </div>
 
                                 </div>
-                                <div *ngIf="user.role == 'EDITOR'">
+                                <div *ngIf="user.role == 'PARTNER'">
                                     <!-- <app-planesyproductos></app-planesyproductos> -->
                                     <app-news></app-news>
                                 </div>

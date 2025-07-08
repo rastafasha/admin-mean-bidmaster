@@ -55,7 +55,7 @@ export class CategoryIndexComponent implements OnInit {
   }
 
   getCurrencies(): void {
-    this.projectTypeService.getProjects().subscribe(
+    this.projectTypeService.getProjectTypes().subscribe(
       res =>{
         this.categorias = res;
         error => this.error = error
@@ -74,7 +74,7 @@ export class CategoryIndexComponent implements OnInit {
       confirmButtonText: 'Si, Borrar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.projectTypeService.deleteProject(_id).subscribe(
+        this.projectTypeService.deleteProjectType(_id).subscribe(
           response =>{
             this.getCurrencies();
           }

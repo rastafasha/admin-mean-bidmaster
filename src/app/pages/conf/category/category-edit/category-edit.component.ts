@@ -69,7 +69,7 @@ export class CategoryEditComponent implements OnInit {
   cargarCategory(_id: string){
     if (_id !== null && _id !== undefined) {
       this.title = 'Editando Categoría';
-      this.projectTypeService.getProject(_id).subscribe(
+      this.projectTypeService.getProjectType(_id).subscribe(
         (res:any) => {
           this.categoryForm.patchValue({
             id: res._id,
@@ -95,7 +95,7 @@ export class CategoryEditComponent implements OnInit {
         ...this.categoryForm.value,
         _id: this.categorySeleccionado._id
       }
-      this.projectTypeService.updateProject(data).subscribe(
+      this.projectTypeService.updateProjectType(data).subscribe(
         resp =>{
           Swal.fire('Actualizado', `${name}  actualizado correctamente`, 'success');
           this.router.navigateByUrl(`/dashboard/categories`);
@@ -104,7 +104,7 @@ export class CategoryEditComponent implements OnInit {
 
     }else{
       //crear
-      this.projectTypeService.createProject(this.categoryForm.value)
+      this.projectTypeService.createProjectType(this.categoryForm.value)
       .subscribe( (resp: any) =>{
         Swal.fire('Creado', `${name} creado correctamente`, 'success');
         this.router.navigateByUrl(`/dashboard/categories`);
@@ -123,7 +123,7 @@ export class CategoryEditComponent implements OnInit {
   }
 
   getCategories(): void {
-    this.projectTypeService.getProjects().subscribe(
+    this.projectTypeService.getProjectTypes().subscribe(
       (res:any) =>{
         this.categories = res;
         error => this.error = error

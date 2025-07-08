@@ -31,7 +31,7 @@ export class ProjecttypeService {
       }
     
     
-      getProjects() {
+      getProjectTypes() {
         const url = `${baseUrl}/projecttype/`;
         return this.http.get<any>(url,this.headers)
           .pipe(
@@ -39,7 +39,7 @@ export class ProjecttypeService {
           )
       }
     
-      getProject(_id: string) {
+      getProjectType(_id: string) {
         const url = `${baseUrl}/projecttype/${_id}`;
         return this.http.get<any>(url, this.headers)
           .pipe(
@@ -49,17 +49,17 @@ export class ProjecttypeService {
    
     
     
-      createProject(projecttype:ProjectType) {
+      createProjectType(projecttype:ProjectType) {
         const url = `${baseUrl}/projecttype/store`;
         return this.http.post(url, projecttype, this.headers);
       }
     
-      updateProject(projecttype:ProjectType) {
+      updateProjectType(projecttype:ProjectType) {
         const url = `${baseUrl}/projecttype/update/${projecttype._id}`;
         return this.http.put(url, projecttype, this.headers);
       }
     
-      deleteProject(_id: string) {
+      deleteProjectType(_id: string) {
         const url = `${baseUrl}/projecttype/delete/${_id}`;
         return this.http.delete(url, this.headers);
       }

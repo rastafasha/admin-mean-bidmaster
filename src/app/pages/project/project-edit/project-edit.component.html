@@ -22,20 +22,29 @@
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <label>Subir PDF<span class="required">*</span></label>
-                                <input type="text" formControlName="file" class="form-control" required>
+                                <input type="file" class="cz-file-drop-input" (change)="cambiarImagen($event)">
+                                <br>
+                                <br>
+                                <button type="button" [disabled]="!imagenSubir" (click)="subirImagen()" class="btn btn-success waves-effect waves-light m-r-10 ">
+                                  <i class="fa fa-save"></i> Cambiar imagen
+                                </button>
 
                             </div>
-                            <div class="col-xs-12 col-md-6">
+
+                            <div class="col-xs-12 col-md-6 ">
                                 <label>Tipo de Proyecto<span class="required">*</span></label>
-                                <input type="text" formControlName="type" class="form-control" required>
+                                <div class="input-group">
 
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <label>category<span class="required">*</span></label>
-                                <input type="text" formControlName="category" class="form-control" required>
+                                    <select class="form-control" formControlName="type">
+                                    
+                                        <option *ngFor="let data of categorias" [value]="data.name">
+                                            {{data.name}}
+                                        </option>
+                                    </select>
 
+                                </div>
                             </div>
-                       
+
                             <div class="col-xs-12 col-md-6">
                                 <label>Fecha de entrga<span class="required">*</span></label>
                                 <input type="date" formControlName="deliveryDate" class="form-control" required>
@@ -70,5 +79,3 @@
         </div>
     </div>
 </div>
-
-

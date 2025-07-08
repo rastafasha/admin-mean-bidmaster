@@ -10,7 +10,7 @@ hasPresentation:string;
 deliveryDate:string;
 date:string;
 partners:User;
-file:string;
+img:string;
 
 }
 

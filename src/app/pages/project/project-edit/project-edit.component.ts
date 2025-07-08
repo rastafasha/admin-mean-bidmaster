@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Project, ProjectType } from 'src/app/models/project';
 import { User } from 'src/app/models/user';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { ProjecttypeService } from 'src/app/services/projecttype.service';
 import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -23,11 +25,18 @@ export class ProjectEditComponent implements OnInit, OnChanges {
   usuario:User;
   project: Project;
   id:string;
+  categorias : ProjectType;
+  public imagenSubir!: File;
+  public imgTemp: any = null;
+
+
   constructor(
     private fb: FormBuilder,
     private usuarioService: UserService,
     private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
+    private projectTypeService: ProjecttypeService,
+    private fileUploadService: FileUploadService,
   ) {
     this.usuario = usuarioService.usuario;
     const base_url = environment.apiUrl;
@@ -35,6 +44,8 @@ export class ProjectEditComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
       this.validarFormulario();
+      this.getCategorias();
+      this.getPartners();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -54,6 +65,47 @@ export class ProjectEditComponent implements OnInit, OnChanges {
       this.title = 'Editando Categoría';
     }
   }
+
+  getCategorias(){
+    this.projectTypeService.getProjectTypes().subscribe((resp:any)=>{
+      console.log(resp);
+      this.categorias = resp;
+    })
+
+  }
+
+  getPartners(){
+    this.usuarioService.getAllEditors().subscribe((resp:any)=>{
+      console.log(resp);
+    })
+  }
+
+  cambiarImagen(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    // your code here, using 'file'
+  }
+  
+
+    const reader = new FileReader();
+    // reader.readAsDataURL(file);
+
+    reader.onloadend = () =>{
+      this.imgTemp = reader.result;
+    }
+}
+
+  subirImagen(){
+    this.fileUploadService
+    .actualizarFoto(this.imagenSubir, 'projects', this.project._id || '')
+    .then(img => { this.project.img = img;
+      Swal.fire('Guardado', 'La imagen fue actualizada', 'success');
+    }).catch(err =>{
+      Swal.fire('Error', 'No se pudo subir la imagen', 'error');
+    })
+  }
+
 
    
   
@@ -85,7 +137,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
               type: res.type,
               deliveryDate: res.deliveryDate,
               partners: res.partners,
-              file: res.file,
+              img: res.img,
             });
             this.projectSeleccionado = res;
             console.log(this.projectSeleccionado);

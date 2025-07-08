@@ -6,18 +6,18 @@
 
 <div *ngIf="user.role === 'SUPERADMIN'|| user.role === 'ADMIN' ">
     <div class="acces-icons animated fadeIn container">
-        <a class="nav-link collapsed cursor" routerLink="/dashboard/buscar">
+        <!-- <a class="nav-link collapsed cursor" routerLink="/dashboard/buscar">
 
             <div class="icontext shadow">
                 <i class="fa fa-search"></i>
                 <h3>Buscar</h3>
             </div>
-        </a>
+        </a> -->
         
         <a class="nav-link collapsed cursor" routerLink="/dashboard/categories">
             <div class="icontext shadow">
                 <i class="fa fa-bookmark"> </i>
-                <h3>Categorías</h3>
+                <h3>Proyectos</h3>
             </div>
         </a>
        
@@ -42,11 +42,11 @@
 
 <div *ngIf="user.role === 'EDITOR'">
     <div class="acces-icons animated fadeIn container">
-        <a class="nav-link collapsed cursor" routerLink="/dashboard/banners">
+        <a class="nav-link collapsed cursor" routerLink="/dashboard/projects">
 
             <div class="icontext shadow">
                 <i class="fa fa-desktop"></i>
-                <h3>Banners</h3>
+                <h3>Projectos</h3>
             </div>
         </a>
 
@@ -54,28 +54,14 @@
 
             <div class="icontext shadow">
                 <i class="fa fa-info-circle"> </i>
-                <h3>Categorías</h3>
-            </div>
-        </a>
-        <a class="nav-link collapsed cursor" routerLink="/dashboard/posts">
-
-            <div class="icontext shadow">
-                <i class="fa fa-pencil-square"></i>
-                <h3>Posts</h3>
-            </div>
-        </a>
-        <a class="nav-link collapsed cursor" routerLink="/dashboard/planes/all'">
-
-            <div class="icontext shadow">
-                <i class="fa fa-bookmark-o"></i>
-                <h3>Planes</h3>
+                <h3>Tipos de Proyecto</h3>
             </div>
         </a>
         <a class="nav-link collapsed cursor" [routerLink]="['/dashboard/profile/', user.id]">
 
             <div class="icontext shadow">
                 <i class="fa fa-user-md"> </i>
-                <h3>Cuenta</h3>
+                <h3>Perfil</h3>
             </div>
         </a>
 
