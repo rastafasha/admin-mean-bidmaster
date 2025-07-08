@@ -290,63 +290,6 @@
                                     <!-- End Change Password Form -->
                                 </div>
 
-                                <div class="tab-pane fade  blogs" id="blogs">
-                                    <ul *ngFor="let blog of blogs |  paginate: { itemsPerPage: count, currentPage: p }"
-                                        style="margin: 0; padding: 0;">
-
-                                        <li class="listgrid">
-                                            <div>
-                                                <div *ngIf="!blog.img " class="imagenblog">
-                                                    <img [src]="blog.img | imagenPipe: 'blogs'"
-                                                        style="height: 50px; width: 50px;" class="img-circle avatar">
-                                                </div>
-                                                <div *ngIf="blog.img" class="imagenblog">
-                                                    <img [src]="blog.img | imagenPipe: 'blogs'"
-                                                        style="height: 50px; width: 50px;" class="img-circle avatar">
-
-                                                </div>
-                                            </div>
-                                            <a class="titulourl" [routerLink]="['/dashboard/post/edit', blog._id]">
-                                                Referencia: {{blog.name}}
-                                            </a>
-                                            <span class="date">
-                                                Fecha: {{blog.createdAt | date:'MMM d, y, h:mm:ss a'}}
-                                            </span>
-                                        </li>
-                                    </ul>
-                                    <br />
-                                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-
-
-                                </div>
-                                <div class="tab-pane fade  blogs" id="subcriptions">
-                                    <ul *ngFor="let subcription of subcriptions |  paginate: { itemsPerPage: count, currentPage: p }"
-                                        style="margin: 0; padding: 0;">
-
-
-                                        <li class="listgridSubcripcione">
-                                            <span class="orderId">
-                                                orderID: {{subcription.orderID}}
-                                            </span>
-                                            <span class="planid">
-                                                plan_id: {{subcription.plan_id}}
-                                            </span>
-                                            <span class="dates">
-                                                Fecha: {{subcription.createdAt | date:'MMM d, y, h:mm:ss a'}}
-                                            </span>
-                                            <span class="montos">
-                                                Monto: {{subcription.monto | currency}}
-                                            </span>
-                                            <span class="statuss">
-                                                status: {{subcription.status }}
-                                            </span>
-                                        </li>
-                                    </ul>
-                                    <br />
-                                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-
-
-                                </div>
                             </div>
                             <!-- End Bordered Tabs -->
 

@@ -4,10 +4,8 @@ import { environment } from '../../environments/environment';
 
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
-import { Payment } from '../models/payment';
-import { Post } from '../models/post';
 import { Category } from '../models/category';
-import { planPaypalSubcription } from '../models/planPaypalSubcription';
+import { Project } from '../models/project';
 
 const base_url = environment.apiUrl;
 
@@ -40,26 +38,19 @@ export class BusquedasService {
           user.role,
           user.uid,
           user.profile,
-          user.blog,
-          user.pago,
         )
     );
   }
 
-  private trasnformarPayments(resultados: any[]): Payment[] {
-    return resultados;
-  }
-  private trasnformarPosts(resultados: any[]): Post[] {
-    return resultados;
-  }
+  
   private trasnformarCategorias(resultados: any[]): Category[] {
     return resultados;
   }
-  private trasnformarSubcriptions(resultados: any[]): planPaypalSubcription[] {
+  private trasnformarProjects(resultados: any[]): Project[] {
     return resultados;
   }
 
-  buscar(tipo: 'usuarios' | 'pagos' | 'blogs' | 'categorias'|'subcriptions', termino: string) {
+  buscar(tipo: 'usuarios' | 'projects' | 'categorias', termino: string) {
     const url = `${base_url}/todo/coleccion/${tipo}/${termino}`;
     return this.http.get<any[]>(url, this.headers).pipe(
       map((resp: any) => {
@@ -67,17 +58,11 @@ export class BusquedasService {
           case 'usuarios':
             return this.trasnformarUsuarios(resp.resultados);
 
-          case 'pagos':
-            return this.trasnformarPayments(resp.resultados);
-
-          case 'blogs':
-            return this.trasnformarPosts(resp.resultados);
-
+          case 'projects':
+            return this.trasnformarProjects(resp.resultados);
           case 'categorias':
             return this.trasnformarCategorias(resp.resultados);
 
-          case 'subcriptions':
-            return this.trasnformarSubcriptions(resp.resultados);
           default:
             return [];
         }

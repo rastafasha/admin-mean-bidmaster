@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/category';
-import { Payment } from 'src/app/models/payment';
-import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { BusquedasService } from 'src/app/services/busqueda.service';
 
 import { Location } from '@angular/common';
-import { planPaypalSubcription } from 'src/app/models/planPaypalSubcription';
 
 @Component({
   selector: 'app-busqueda',
@@ -20,9 +17,6 @@ export class BusquedaComponent implements OnInit {
 
   categorias: Category;
   usuarios: User;
-  blogs: Post;
-  pagos: Payment;
-  subcriptions: planPaypalSubcription;
 
   query:string ='';
 
@@ -46,9 +40,6 @@ export class BusquedaComponent implements OnInit {
       (resp:any) => {
         this.usuarios = resp.usuarios;
         this.categorias = resp.categorias;
-        this.blogs = resp.blogs;
-        this.pagos = resp.pagos;
-        this.subcriptions = resp.subcriptions;
       }
     )
   }
@@ -62,9 +53,6 @@ export class BusquedaComponent implements OnInit {
         (resp:any) => {
           this.usuarios = resp.usuarios;
         this.categorias = resp.categorias;
-        this.blogs = resp.blogs;
-        this.pagos = resp.pagos;
-        this.subcriptions = resp.subcriptions;
       
           
         }

@@ -2,16 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
-import { Payment } from 'src/app/models/payment';
 import { User } from 'src/app/models/user';
-import { PaymentService } from 'src/app/services/payment.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Profile } from 'src/app/models/profile';
-import { Post } from 'src/app/models/post';
-import { PostService } from 'src/app/services/post.service';
-import { planPaypalSubcription } from 'src/app/models/planPaypalSubcription';
-import { PlanPaypalSubcriptionService } from 'src/app/services/paypalSubcription.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,12 +18,7 @@ export class UserProfileComponent implements OnInit {
   usuario: User;
   user: User;
   profile: Profile;
-  public blogs: Post;
   error: string;
-  subcriptions: planPaypalSubcription;
-
-  public pagos: Payment[] =[];
-  userPagos: Payment;
   uid:string;
 
   rolesSelected:number;
@@ -40,11 +29,8 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private profileService: ProfileService,
-    private paymentService: PaymentService,
-    private postService: PostService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
-    private subcriptionPaypalService: PlanPaypalSubcriptionService,
 
   ) {
     this.usuario = userService.usuario;
@@ -55,9 +41,6 @@ export class UserProfileComponent implements OnInit {
     this.closeMenu();
     this.activatedRoute.params.subscribe( ({id}) => this.getUserRemoto(id));
     this.activatedRoute.params.subscribe( ({id}) => this.getProfile(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.getPagos(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.getBlogs(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.getUserSubcription(id));
     
   }
 
@@ -94,20 +77,6 @@ export class UserProfileComponent implements OnInit {
     
   }
 
-  getPagos(id){
-    this.paymentService.getPagosbyUser(id).subscribe(
-      res =>{
-        this.pagos = res;
-        error => this.error = error;
-      }
-    );
-  }
-  getUserSubcription(id:string){
-
-    this.subcriptionPaypalService.getByUser(id).subscribe((data: any) => {
-      this.subcriptions = data;
-    });
-  }
 
 
   goBack() {
@@ -123,13 +92,5 @@ export class UserProfileComponent implements OnInit {
     )
   }
 
-  getBlogs(_id:string){
-    this.postService.getByUser(_id).subscribe(
-      res =>{
-        this.blogs = res;
-        error => this.error = error;
-        // console.log(this.blogs);
-      }
-    );
-  }
+  
 }

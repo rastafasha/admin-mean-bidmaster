@@ -1,7 +1,7 @@
 <!-- =======| Main |======= -->
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
-    <div class="col-xs-12">
+    <div class="col-xs-12" >
         <div class="leftside">
             <!-- Page Title -->
             <div class="pagetitle">
@@ -27,7 +27,7 @@
 
             <!-- Recent Pagos -->
             <div class="container">
-                <div class="row">
+                <div class="row" >
                     <div class="col-xs-11 col-sm-11">
                         <!-- buscador -->
                         <form class="form-horizontal">
@@ -58,37 +58,15 @@
 
                     <div class="card-body">
 
-
-                        <table [ngClass]="loading? 'table table-borderless datatable':'table table-borderless'">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Creado</th>
-                                    <th class="text-nowrap">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- <tr *ngFor="let category of categorias |  paginate: { itemsPerPage: count, currentPage: p }">
-
-                                    <td>{{category.nombre}}</td>
-                                    <td>{{category.createdAt | date:'MMM d, y, h:mm:ss a'}} </td>
-
-                                    <td class="text-nowrap text-center">
-
-                                        <a [routerLink]="['/dashboard/project/edit', category._id]" class="cursor" data-toggle="tooltip" data-original-title="Edit">
-                                            <i class="fa fa-edit text-success" style="font-size: 18px;"></i>
-                                        </a>
-                                        <a (click)="eliminarCategory(category._id)" class="cursor" data-toggle="tooltip" data-original-title="Borrar">
-                                            <i class="fa fa-trash text-danger" style="font-size: 18px; margin-left: 10px; margin-right: 10px;"></i>
-                                        </a>
-                                    </td>
+                        <div class="contenido" >
+                            <div class="item " *ngFor="let project of projects">
+                                <app-projectitem [project]="project"></app-projectitem>
+                            </div>
+                        </div>
 
 
-                                </tr> -->
-                            </tbody>
-
-                        </table>
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        
+                        <pagination-controls  (pageChange)="p = $event"></pagination-controls>
 
                     </div>
 

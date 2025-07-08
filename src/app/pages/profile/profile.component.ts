@@ -9,10 +9,6 @@ import { environment } from 'src/environments/environment';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Profile } from 'src/app/models/profile';
 import { FileUploadService } from 'src/app/services/file-upload.service';
-import { Post } from 'src/app/models/post';
-import { PostService } from 'src/app/services/post.service';
-import { planPaypalSubcription } from 'src/app/models/planPaypalSubcription';
-import { PlanPaypalSubcriptionService } from 'src/app/services/paypalSubcription.service';
 
 
 @Component({
@@ -59,14 +55,12 @@ export class ProfileComponent implements OnInit {
   public pass_error = false;
 
   public usuario: User;
-  public blogs: Post;
 
   public perfilForm: FormGroup;
   public imagenSubir: File;
   public imgTemp: any = null;
 
   public direcciones : Profile[];
-  subcriptions: planPaypalSubcription;
 
   //DATA
   public new_password = '';
@@ -80,8 +74,6 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private fb: FormBuilder,
     private fileUploadService: FileUploadService,
-    private postService: PostService,
-    private subcriptionPaypalService: PlanPaypalSubcriptionService,
 
   ) {
     this.usuario = this.userService.usuario;
@@ -128,8 +120,6 @@ export class ProfileComponent implements OnInit {
     
     this.activatedRoute.params.subscribe( ({id}) => this.listar(id));
     this.activatedRoute.params.subscribe( ({id}) => this.iniciarFormularioPerfil(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.getBlogs(id));
-    this.activatedRoute.params.subscribe( ({id}) => this.getUserSubcription(id));
 
   }
 
@@ -147,23 +137,7 @@ export class ProfileComponent implements OnInit {
     
   }
 
-  getBlogs(_id:string){
-    this.postService.getByUser(_id).subscribe(
-      res =>{
-        this.blogs = res;
-        error => this.error = error;
-        // console.log(this.blogs);
-      }
-    );
-  }
-
-  getUserSubcription(id:string){
-
-    this.subcriptionPaypalService.getByUser(id).subscribe((data: any) => {
-      this.subcriptions = data;
-    });
-  }
-
+  
 
 
   iniciarFormularioPerfil(id:string){

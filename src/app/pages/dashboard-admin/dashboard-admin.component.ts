@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/category';
-import { Payment } from 'src/app/models/payment';
-import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { BusquedasService } from 'src/app/services/busqueda.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -17,6 +15,7 @@ export class DashboardAdminComponent implements OnInit {
   title = 'Panel Administrativo';
   public user: User;
   public profile: User;
+  display: string = 'none'
 
   error: string;
   uid:string;
@@ -24,8 +23,6 @@ export class DashboardAdminComponent implements OnInit {
   categorias: Category;
   usuarios: User;
   usuario: User;
-  blogs: Post;
-  pagos: Payment;
   query:string ='';
 
   constructor(

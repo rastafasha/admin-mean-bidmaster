@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ReciboFacturaComponent } from '../components/recibo-factura/recibo-factura.component';
 import { ConfiguracionesComponent } from './conf/configuraciones/configuraciones.component';
 import { RolesViewComponent } from './conf/roles/roles-view/roles-view.component';
 import { ContactComponent } from './contact/contact.component';
 
 //pages
 import { DashboardComponent } from './dashboard/dashboard.component';
-
 import { HelpComponent } from './help/help.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UsersComponent } from './users/users.component';

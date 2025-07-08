@@ -1,12 +1,9 @@
-import { Payment } from "./payment";
-import { Post } from "./post";
+
 import { Profile } from "./profile";
 
 export class User {
 
   public profile?: Profile;
-  public pago?: Payment;
-  public blog?: Post;
 
   constructor(
     public username: string,
