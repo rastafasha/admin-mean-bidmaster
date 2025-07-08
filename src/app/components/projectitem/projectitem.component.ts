@@ -15,7 +15,7 @@ export class ProjectitemComponent implements OnInit {
   @Output() onEdit = new EventEmitter<string>();
   @Output() onDelete = new EventEmitter<string>();
   @Output() onEditProject = new EventEmitter<Project>();
-  @Output() selectedProjectProfile: Project;
+  @Output() selectedProject: Project;
 
  
   ngOnInit(): void {
@@ -39,6 +39,7 @@ export class ProjectitemComponent implements OnInit {
   }
 
   openPaymentsModal(project: Project): void {
-    this.selectedProjectProfile = project;
+    this.selectedProject = project;
+    console.log(project);
   }
 }

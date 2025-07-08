@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+
+import { Component, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Project, ProjectType } from 'src/app/models/project';
@@ -13,13 +14,15 @@ import Swal from 'sweetalert2';
   templateUrl: './project-edit.component.html',
   styleUrls: ['./project-edit.component.css']
 })
-export class ProjectEditComponent implements OnInit {
+export class ProjectEditComponent implements OnInit, OnChanges {
 
   @Input() projectSeleccionado;
   type: ProjectType;
   projectForm:FormGroup;
   title:string;
   usuario:User;
+  project: Project;
+  id:string;
   constructor(
     private fb: FormBuilder,
     private usuarioService: UserService,
@@ -30,38 +33,29 @@ export class ProjectEditComponent implements OnInit {
     const base_url = environment.apiUrl;
   }
 
-  
-  
-
-
   ngOnInit(): void {
-      // console.log(this.projectSeleccionado);
-      this.iniciarformulario();
-      this.activatedRoute.params.subscribe(({ id }) => this.cargarProject(id));
-      
-    }
+      this.validarFormulario();
+  }
 
-    iniciarformulario(){
-      if (this.projectSeleccionado) {
-        this.title = 'Editando Proyecto';
-        this.projectForm = this.fb.group({
-          name: [this.projectSeleccionado.name, Validators.required],
-          url: [this.projectSeleccionado.url, Validators.required],
-          category: [this.projectSeleccionado.category, Validators.required],
-          hasPresentation: [this.projectSeleccionado.hasPresentation, Validators.required],
-          deliveryDate: [this.projectSeleccionado.deliveryDate, Validators.required],
-          partners: [this.projectSeleccionado.partners, Validators.required],
-          type: [this.projectSeleccionado.type, Validators.required],
-          file: [this.projectSeleccionado.file, Validators.required],
-          id: [this.projectSeleccionado._id, Validators.required],
-        });
-      } else {
-        this.activatedRoute.params.subscribe(({ id }) => this.cargarProject(id));
-        this.validarFormulario();
-        window.scrollTo(0, 0);
-        this.title = 'Creando Proyecto';
-      }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['projectSeleccionado'] && changes['projectSeleccionado'].currentValue) {
+      const project = changes['projectSeleccionado'].currentValue;
+      this.projectForm.patchValue({
+        id: project._id,
+        name: project.name,
+        url: project.url,
+        category: project.category,
+        hasPresentation: project.hasPresentation,
+        type: project.type,
+        deliveryDate: project.deliveryDate,
+        partners: project.partners,
+        file: project.file,
+      });
+      this.title = 'Editando Categoría';
     }
+  }
+
+   
   
     validarFormulario(){
       this.projectForm = this.fb.group({
@@ -80,7 +74,6 @@ export class ProjectEditComponent implements OnInit {
     cargarProject(_id: string){
       if (_id !== null && _id !== undefined) {
         this.title = 'Editando Categoría';
-        this.iniciarformulario();
         this.projectService.getProject(_id).subscribe(
           res => {
             this.projectForm.patchValue({
