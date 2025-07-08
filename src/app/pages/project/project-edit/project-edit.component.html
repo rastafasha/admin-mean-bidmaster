@@ -54,7 +54,6 @@
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <label>Asociados<span class="required">*</span></label>
-                                <!-- <input type="text" formControlName="partners" class="form-control" required> -->
                                 <div class="input-group">
 
                                     <ng-container formArrayName="partners" *ngIf="partners && partners.length > 0">
@@ -70,26 +69,22 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <!-- <label>¿Tiene presentación lista para enviar?<span class="required">*</span></label> -->
-                                <!-- <input type="text" formControlName="hasPresentation" class="form-control" required> -->
                                 <div class="form-check">
-                                    <input class="form-check-input" formControlName="hasPresentation" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" formControlName="hasPresentation" type="checkbox"
+                                        id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         ¿Tiene presentación lista para enviar?
                                     </label>
-                                    </div>
+                                </div>
                             </div>
 
                         </div>
 
-                        <input type="hidden" formControlName="id">
                         <button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit"
                             (click)="handleSubmit()">Guardar</button>
 
 
                     </form>
-
-
                 </div>
             </div>
             <div class="modal-footer">

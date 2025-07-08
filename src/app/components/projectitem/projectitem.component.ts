@@ -40,6 +40,6 @@ export class ProjectitemComponent implements OnInit {
 
   openPaymentsModal(project: Project): void {
     this.selectedProject = project;
-    console.log(project);
+    // console.log(project);
   }
 }

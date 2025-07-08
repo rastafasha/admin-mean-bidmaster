@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-xs-1 col-sm-1" [style.display]="displaycomponent">
                         <div class="text-right">
-                            <button class="btn btn-primary" href="javascript:void(0)" data-bs-toggle="modal"
+                            <button class="btn btn-primary" (click)="openEditModal()"  href="javascript:void(0)" data-bs-toggle="modal"
                                 data-bs-target="#editProject">
                                 <i class="fa fa-pencil"></i>
                                 Crear

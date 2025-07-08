@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Project, ProjectType } from 'src/app/models/project';
@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-project-edit',
   templateUrl: './project-edit.component.html',
@@ -19,6 +21,8 @@ import Swal from 'sweetalert2';
 export class ProjectEditComponent implements OnInit, OnChanges {
 
   @Input() projectSeleccionado;
+  @Output() refreshProjectList: EventEmitter<void> = new EventEmitter<void>();
+
   type: ProjectType;
   projectForm:FormGroup;
   title:string;
@@ -123,17 +127,17 @@ export class ProjectEditComponent implements OnInit, OnChanges {
 
    
   
-  validarFormulario(){
+validarFormulario(){
       this.projectForm = this.fb.group({
         name: ['',Validators.required],
         url: ['',Validators.required],
         category: ['',Validators.required],
-        hasPresentation: ['',Validators.required],
+        hasPresentation: [false,Validators.required],
         deliveryDate: ['',Validators.required],
         partners: this.fb.array([], Validators.required),
         type: ['',Validators.required],
         file: ['',Validators.required],
-        id: ['',Validators.required],
+        id: ['',],
       })
     }
   
@@ -186,8 +190,14 @@ export class ProjectEditComponent implements OnInit, OnChanges {
         this.projectService.updateProject(data).subscribe(
           resp =>{
             Swal.fire('Actualizado', `${nombre}  actualizado correctamente`, 'success');
-            // this.router.navigateByUrl(`/dashboard/projects`);
-            console.log(this.projectSeleccionado);
+            // Close modal programmatically
+            const modalElement = document.getElementById('editProject');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            if(modal){
+              modal.hide();
+            }
+            // Emit event to refresh project list
+            this.refreshProjectList.emit();
           });
 
       }else{
@@ -195,7 +205,14 @@ export class ProjectEditComponent implements OnInit, OnChanges {
         this.projectService.createProject(dataToSend)
         .subscribe( (resp: any) =>{
           Swal.fire('Creado', `${nombre} creado correctamente`, 'success');
-          // this.router.navigateByUrl(`/dashboard/categories`);
+          // Close modal programmatically
+          const modalElement = document.getElementById('editProject');
+          const modal = bootstrap.Modal.getInstance(modalElement);
+          if(modal){
+            modal.hide();
+          }
+          // Emit event to refresh project list
+          this.refreshProjectList.emit();
           // this.enviarNotificacion();
         })
       }

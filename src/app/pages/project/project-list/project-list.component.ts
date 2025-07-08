@@ -73,5 +73,8 @@ export class ProjectListComponent implements OnInit {
     this.query = '';
     
   }
+  openEditModal(): void {
+    this.selectedProject = null;
+  }
 
 }

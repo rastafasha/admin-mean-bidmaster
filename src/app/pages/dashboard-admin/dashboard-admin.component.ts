@@ -28,6 +28,7 @@ export class DashboardAdminComponent implements OnInit {
   usuarios: User;
   usuario: User;
   query:string ='';
+  selectedProject:string;
 
   constructor(
     private userService: UserService,
@@ -74,6 +75,9 @@ export class DashboardAdminComponent implements OnInit {
     );
   }
 
+  openEditModal(): void {
+    this.selectedProject = null;
+  }
   
 
 }
