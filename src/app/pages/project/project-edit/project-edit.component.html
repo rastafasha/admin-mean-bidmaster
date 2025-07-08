@@ -35,14 +35,12 @@
                             <div class="col-xs-12 col-md-6 ">
                                 <label>Tipo de Proyecto<span class="required">*</span></label>
                                 <div class="input-group">
-
                                     <select class="form-control" formControlName="type">
-
+                                        <option value="">Seleccione</option>
                                         <option *ngFor="let data of categorias" [value]="data.name">
                                             {{data.name}}
                                         </option>
                                     </select>
-
                                 </div>
                             </div>
 

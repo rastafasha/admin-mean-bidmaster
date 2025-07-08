@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Project } from 'src/app/models/project';
+import { Project, ProjectType } from 'src/app/models/project';
 import { BusquedasService } from 'src/app/services/busqueda.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { ProjecttypeService } from 'src/app/services/projecttype.service';
 
 @Component({
   selector: 'app-project-list',
@@ -17,17 +18,20 @@ export class ProjectListComponent implements OnInit {
   p: number = 1;
   count: number = 8;
   loading:boolean = false;
+  categories: ProjectType;
 
   selectedProject: Project;
 
   constructor(
     private projectService: ProjectService,
     private busquedasService: BusquedasService,
+    private proyectTypeService: ProjecttypeService,
 
   ) { }
 
   ngOnInit(): void {
     this.getProjects();
+    this.getCategories();
   }
 
   getProjects(){
@@ -37,6 +41,13 @@ export class ProjectListComponent implements OnInit {
       // console.log(resp);
       this.loading = false;
     })
+  }
+
+  getCategories(){
+    this.proyectTypeService.getProjectTypes().subscribe((resp:any)=>{
+      this.categories = resp;
+    })
+
   }
 
   onEditProject(project: Project) {
@@ -71,6 +82,8 @@ export class ProjectListComponent implements OnInit {
   PageSize(){
     this.getProjects();
     this.query = '';
+    this.categories = null;
+    this.getCategories()
     
   }
   openEditModal(): void {
