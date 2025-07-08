@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Project, ProjectType } from 'src/app/models/project';
@@ -15,9 +15,9 @@ import Swal from 'sweetalert2';
 })
 export class ProjectEditComponent implements OnInit {
 
+  @Input() projectSeleccionado;
   type: ProjectType;
   projectForm:FormGroup;
-  projectSeleccionado:Project;
   title:string;
   usuario:User;
   constructor(
@@ -34,18 +34,32 @@ export class ProjectEditComponent implements OnInit {
   
 
 
-    ngOnInit(): void {
-      this.activatedRoute.params.subscribe( ({id}) => this.cargarProject(id));
-      this.validarFormulario();
-      window.scrollTo(0,0);
-  
-      if(this.projectSeleccionado){
-        //actualizar
+  ngOnInit(): void {
+      // console.log(this.projectSeleccionado);
+      this.iniciarformulario();
+      this.activatedRoute.params.subscribe(({ id }) => this.cargarProject(id));
+      
+    }
+
+    iniciarformulario(){
+      if (this.projectSeleccionado) {
+        this.title = 'Editando Proyecto';
+        this.projectForm = this.fb.group({
+          name: [this.projectSeleccionado.name, Validators.required],
+          url: [this.projectSeleccionado.url, Validators.required],
+          category: [this.projectSeleccionado.category, Validators.required],
+          hasPresentation: [this.projectSeleccionado.hasPresentation, Validators.required],
+          deliveryDate: [this.projectSeleccionado.deliveryDate, Validators.required],
+          partners: [this.projectSeleccionado.partners, Validators.required],
+          type: [this.projectSeleccionado.type, Validators.required],
+          file: [this.projectSeleccionado.file, Validators.required],
+          id: [this.projectSeleccionado._id, Validators.required],
+        });
+      } else {
+        this.activatedRoute.params.subscribe(({ id }) => this.cargarProject(id));
+        this.validarFormulario();
+        window.scrollTo(0, 0);
         this.title = 'Creando Proyecto';
-  
-      }else{
-        //crear
-        this.title = 'Editar Proyecto';
       }
     }
   
@@ -66,6 +80,7 @@ export class ProjectEditComponent implements OnInit {
     cargarProject(_id: string){
       if (_id !== null && _id !== undefined) {
         this.title = 'Editando Categoría';
+        this.iniciarformulario();
         this.projectService.getProject(_id).subscribe(
           res => {
             this.projectForm.patchValue({

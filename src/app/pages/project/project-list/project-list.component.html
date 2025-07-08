@@ -80,7 +80,10 @@
 
                         <div class="contenido">
                             <div class="item " *ngFor="let project of projects">
-                                <app-projectitem [project]="project"></app-projectitem>
+                                <app-projectitem [project]="project" (onEditProject)="onEditProject($event)"
+                                (onDeleteProject)="onDeleteProject($event)"
+                                ></app-projectitem>
+                                <app-project-edit [projectSeleccionado]="project"></app-project-edit>
                             </div>
                         </div>
 
@@ -99,4 +102,4 @@
 
 </div>
 <!--/main-->
-<app-project-edit></app-project-edit>
+

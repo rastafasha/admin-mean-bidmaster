@@ -14,9 +14,10 @@ export class ProjectitemComponent implements OnInit {
   @Output() onTogglePresentation = new EventEmitter<string>();
   @Output() onEdit = new EventEmitter<string>();
   @Output() onDelete = new EventEmitter<string>();
+  @Output() onEditProject = new EventEmitter<Project>();
+  @Output() selectedProjectProfile: Project;
 
-  constructor() { }
-
+ 
   ngOnInit(): void {
   }
 
@@ -30,5 +31,14 @@ export class ProjectitemComponent implements OnInit {
 
   deleteProject() {
     this.onDelete.emit(this.project._id);
+
+  }
+
+  openEditModal(project: Project): void {
+    this.onEditProject.emit(project);
+  }
+
+  openPaymentsModal(project: Project): void {
+    this.selectedProjectProfile = project;
   }
 }

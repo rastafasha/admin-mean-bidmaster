@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/category';
+import { Project } from 'src/app/models/project';
 import { User } from 'src/app/models/user';
 import { BusquedasService } from 'src/app/services/busqueda.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -12,6 +13,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./dashboard-admin.component.css']
 })
 export class DashboardAdminComponent implements OnInit {
+  @Input() projectSeleccionado:Project;
+
   title = 'Panel Administrativo';
   public user: User;
   public profile: User;

@@ -50,11 +50,16 @@
       </button>
 
       <div  class="d-flex gap-2">
-        <button href="javascript:void(0)"  data-bs-toggle="modal" data-bs-target="#editProject" class="btn btn-link text-primary p-2">
+        <button href="javascript:void(0)" (click)="openEditModal(project)"  data-bs-toggle="modal" data-bs-target="#editProject" class="btn btn-link text-primary p-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
             <path d="M12.146.854a.5.5 0 01.708 0l2.292 2.292a.5.5 0 010 .708l-9.793 9.793a.5.5 0 01-.168.11l-4 1.5a.5.5 0 01-.65-.65l1.5-4a.5.5 0 01.11-.168l9.793-9.793z"/>
           </svg>
         </button>
+        <!-- <button href="javascript:void(0)" [routerLink]="['/project/edit',project._id]" class="btn btn-link text-primary p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+            <path d="M12.146.854a.5.5 0 01.708 0l2.292 2.292a.5.5 0 010 .708l-9.793 9.793a.5.5 0 01-.168.11l-4 1.5a.5.5 0 01-.65-.65l1.5-4a.5.5 0 01.11-.168l9.793-9.793z"/>
+          </svg>
+        </button> -->
         <button (click)="deleteProject()" class="btn btn-link text-danger p-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
             <path d="M5.5 5.5a.5.5 0 01.5.5v6a.5.5 0 01-1 0v-6a.5.5 0 01.5-.5zm5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0v-6a.5.5 0 01.5-.5z"/>
@@ -65,3 +70,4 @@
     </div>
   </div>
 </div>
+

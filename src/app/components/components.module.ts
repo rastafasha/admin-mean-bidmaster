@@ -16,6 +16,7 @@ import { ModalCondicionesComponent } from './modal-condiciones/modal-condiciones
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { PieChart2Component } from './charts/pie-chart2/pie-chart2.component';
 import { ProjectitemComponent } from './projectitem/projectitem.component';
+import { ProjecttypeeditComponent } from './projecttypeedit/projecttypeedit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProjectitemComponent } from './projectitem/projectitem.component';
     ModalCondicionesComponent,
     LineChartComponent,
     PieChart2Component,
-    ProjectitemComponent
+    ProjectitemComponent,
+    ProjecttypeeditComponent
   ],
   exports: [
     UsuariosRecientesComponent,
@@ -32,7 +34,8 @@ import { ProjectitemComponent } from './projectitem/projectitem.component';
     ModalCondicionesComponent,
     LineChartComponent,
     PieChart2Component,
-    ProjectitemComponent
+    ProjectitemComponent,
+    ProjecttypeeditComponent
   ],
   imports: [
     CommonModule,
