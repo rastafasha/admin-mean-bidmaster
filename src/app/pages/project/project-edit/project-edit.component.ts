@@ -237,6 +237,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
           `${nombre}  actualizado correctamente`,
           'success'
         );
+        
         // Close modal programmatically
         const modalElement = document.getElementById('editProject');
         const modal = bootstrap.Modal.getInstance(modalElement);
@@ -245,6 +246,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
         }
         // Emit event to refresh project list
         this.refreshProjectList.emit();
+        this.ngOnInit()
       });
     } else {
       //crear
@@ -259,6 +261,7 @@ export class ProjectEditComponent implements OnInit, OnChanges {
         // Emit event to refresh project list
         this.refreshProjectList.emit();
         // this.enviarNotificacion();
+        this.ngOnInit()
       });
     }
   }

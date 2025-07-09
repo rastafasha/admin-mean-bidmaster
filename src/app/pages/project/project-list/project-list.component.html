@@ -84,11 +84,11 @@
 
                         <div class="contenido">
                             <div class="item " *ngFor="let project of projects | slice: 0: limit">
-                                <app-projectitem [project]="project" (onEditProject)="onEditProject($event)"
-                                (onDeleteProject)="onDeleteProject($event)"
-                                ></app-projectitem>
+<app-projectitem [project]="project" (onEditProject)="onEditProject($event)"
+(onDelete)="onDeleteProject($event)"
+></app-projectitem>
                             </div>
-                            <app-project-edit [projectSeleccionado]="selectedProject"></app-project-edit>
+<app-project-edit [projectSeleccionado]="selectedProject" (refreshProjectList)="getProjects()"></app-project-edit>
                         </div>
 
 

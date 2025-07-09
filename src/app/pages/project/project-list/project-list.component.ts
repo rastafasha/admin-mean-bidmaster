@@ -3,6 +3,7 @@ import { Project, ProjectType } from 'src/app/models/project';
 import { BusquedasService } from 'src/app/services/busqueda.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { ProjecttypeService } from 'src/app/services/projecttype.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-project-list',
@@ -56,9 +57,29 @@ export class ProjectListComponent implements OnInit {
   onDeleteProject(project: Project) {
     this.selectedProject = project;
 
-    this.projectService.deleteProject(project._id).subscribe((resp:any)=>{
+
+    Swal.fire({
+            title: 'Estas Seguro?',
+            text: "No podras recuperarlo!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Borrar!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.projectService.deleteProject(project._id).subscribe((resp:any)=>{
       this.getProjects();
     })
+              Swal.fire(
+                'Borrado!',
+                'El Archivo fue borrado.',
+                'success'
+              )
+              this.ngOnInit();
+            }
+          });
+      
   }
 
   search(){
