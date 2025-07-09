@@ -6,9 +6,10 @@ export class Project {
 url:string;
 type:ProjectType;
 category:string;
-hasPresentation:string;
+hasPresentation:boolean;
 deliveryDate:string;
 date:string;
+status:boolean;
 partners:User;
 img:string;
 

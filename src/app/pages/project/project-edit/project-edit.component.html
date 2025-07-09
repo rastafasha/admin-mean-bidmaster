@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <div class="container">
 
-                    <form class="form-horizontal form-material" (ngSubmit)="handleSubmit()" [formGroup]="projectForm">
+<form *ngIf="projectForm" class="form-horizontal form-material" (ngSubmit)="handleSubmit()" [formGroup]="projectForm">
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <label>Nombre del Proyecto <span class="required">*</span></label>

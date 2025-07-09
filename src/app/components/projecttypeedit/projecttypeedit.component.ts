@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ProjectType } from 'src/app/models/project';
+import { ProjecttypeService } from 'src/app/services/projecttype.service';
 
 @Component({
   selector: 'app-projecttypeedit',
@@ -8,12 +10,19 @@ import { FormGroup } from '@angular/forms';
 })
 export class ProjecttypeeditComponent implements OnInit {
 
-  projecttypeForm:FormGroup;
-  constructor() { }
+  @Input() categories: ProjectType;
+  displaycomponent: string = 'none';
+  public categorySeleccionado: ProjectType;
+  error: string;
+
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
 
   handleSubmit(){}
+
+  
 
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { Project } from '../../../models/project';
 
 @Component({
   selector: 'app-line-chart',
@@ -7,17 +8,22 @@ import { Chart } from 'chart.js/auto';
   styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnChanges {
+  @Input() projects: Project[] = [];
+
   public chart: Chart;
-  // @Input() calificaciones: Calificacion[] | undefined;
 
   ngOnChanges(changes: SimpleChanges) {
-    // console.log('ngOnChanges called with calificaciones:', this.calificaciones);
-    // if (changes['calificaciones'] && this.calificaciones && this.calificaciones.length > 0) {
-    //   this.createChart();
-    // }
+    setTimeout(()=>{
+      console.log('LineChartComponent ngOnChanges projects:', this.projects);
+    if (changes['projects'] && this.projects && this.projects.length > 0) {
+      this.createChart();
+    }
+    }, 2000)
   }
 
   createChart() {
+    console.log('LineChartComponent createChart projects:', this.projects);
+
     const labels = [
       'Enero',
       'Febrero',
@@ -33,37 +39,30 @@ export class LineChartComponent implements OnChanges {
       'Diciembre',
     ];
 
-    // Helper function to generate random color
-    function getRandomColor() {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
 
-    // Group calificaciones by materia.name
+    // Filter projects with status true
+    const activeProjects = this.projects.filter(project => project.status === true);
+
+    // Group projects by name and count occurrences per month (dummy example)
     const grouped: { [key: string]: number[] } = {};
-    // if (this.calificaciones) {
-    //   this.calificaciones.forEach((calificacion) => {
-    //     const materiaName = calificacion.materia?.name || 'Unknown';
-    //     if (!grouped[materiaName]) {
-    //       grouped[materiaName] = new Array(12).fill(0);
-    //     }
-    //     const dataArray = grouped[materiaName];
-    //     // Use created_at date to get month index
-    //     const createdAt = calificacion['created_at'] ? new Date(calificacion['created_at']) : null;
-    //     const monthIndex = createdAt ? createdAt.getMonth() : 0;
-    //     dataArray[monthIndex] = calificacion.grade || 0;
-    //   });
-    // }
 
-    const datasets = Object.keys(grouped).map((materiaName) => ({
-      label: materiaName,
-      data: grouped[materiaName],
+    activeProjects.forEach(project => {
+      const projectName = project.name || 'Unknown';
+      if (!grouped[projectName]) {
+        grouped[projectName] = new Array(12).fill(0);
+      }
+      const dataArray = grouped[projectName];
+      // Use deliveryDate to get month index
+      const createdAt = project.deliveryDate ? new Date(project.deliveryDate) : null;
+      const monthIndex = createdAt ? createdAt.getMonth() : 0;
+      dataArray[monthIndex] += 1; // Count projects per month
+    });
+
+    const datasets = Object.keys(grouped).map((projectName) => ({
+      label: projectName,
+      data: grouped[projectName],
       fill: false,
-      borderColor: getRandomColor(),
+      borderColor: this.getRandomColor(),
       tension: 0.1,
     }));
 
@@ -88,4 +87,15 @@ export class LineChartComponent implements OnChanges {
       },
     });
   }
+
+
+    // Helper function to generate random color
+    getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
 }

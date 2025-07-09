@@ -17,6 +17,10 @@ import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { PieChart2Component } from './charts/pie-chart2/pie-chart2.component';
 import { ProjectitemComponent } from './projectitem/projectitem.component';
 import { ProjecttypeeditComponent } from './projecttypeedit/projecttypeedit.component';
+import { CategoryEditComponent } from '../pages/conf/category/category-edit/category-edit.component';
+import { PagesModule } from '../pages/pages.module';
+import { ConfModule } from '../pages/conf/conf.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +50,8 @@ import { ProjecttypeeditComponent } from './projecttypeedit/projecttypeedit.comp
     PipesModule,
     // NgxPayPalModule,
     NgxPaginationModule,
+    ConfModule,
+    SharedModule
   ]
 })
 export class ComponentsModule { }

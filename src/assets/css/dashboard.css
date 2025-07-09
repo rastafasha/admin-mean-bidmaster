@@ -172,6 +172,8 @@ p {
     height: 70px;
     width: 130px;
     justify-content: space-between;
+    padding-top: 10px;
+    
 }
 
 .icontext i {

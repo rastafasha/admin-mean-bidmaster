@@ -60,6 +60,11 @@ export class ProjectService {
       return this.http.put(url, project, this.headers);
     }
   
+    updateProjectStatus(project:Project) {
+      const url = `${baseUrl}/projects/updatestatus/${project._id}`;
+      return this.http.put(url, project, this.headers);
+    }
+  
     deleteProject(_id: string) {
       const url = `${baseUrl}/projects/delete/${_id}`;
       return this.http.delete(url, this.headers);

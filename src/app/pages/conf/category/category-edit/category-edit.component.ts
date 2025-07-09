@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -18,13 +18,15 @@ import { ProjecttypeService } from 'src/app/services/projecttype.service';
 })
 export class CategoryEditComponent implements OnInit {
 
-  title : string;
+  @Input() displaycomponent: string = 'block';
+  @Input() categories: ProjectType;
 
+  title : string;
   public categoryForm: FormGroup;
   public category: ProjectType;
   public usuario: User;
-  categories: ProjectType;
   error: string;
+  isLoading:boolean=false;
 
   idcategory:any;
 
@@ -86,7 +88,7 @@ export class CategoryEditComponent implements OnInit {
   }
 
   updateCategory(){
-
+    this.isLoading = true;
     const {name } = this.categoryForm.value;
 
     if(this.categorySeleccionado){
@@ -98,8 +100,10 @@ export class CategoryEditComponent implements OnInit {
       this.projectTypeService.updateProjectType(data).subscribe(
         resp =>{
           Swal.fire('Actualizado', `${name}  actualizado correctamente`, 'success');
-          this.router.navigateByUrl(`/dashboard/categories`);
-          console.log(this.categorySeleccionado);
+          // this.router.navigateByUrl(`/dashboard/categories`);
+          // console.log(this.categorySeleccionado);
+          this.getCategories();
+          this.isLoading = false;
         });
 
     }else{
@@ -107,8 +111,10 @@ export class CategoryEditComponent implements OnInit {
       this.projectTypeService.createProjectType(this.categoryForm.value)
       .subscribe( (resp: any) =>{
         Swal.fire('Creado', `${name} creado correctamente`, 'success');
-        this.router.navigateByUrl(`/dashboard/categories`);
+        // this.router.navigateByUrl(`/dashboard/categories`);
         // this.enviarNotificacion();
+        this.getCategories();
+          this.isLoading = false;
       })
     }
 
@@ -130,5 +136,32 @@ export class CategoryEditComponent implements OnInit {
       }
     );
   }
+
+  eliminarCategory(_id:string){
+      Swal.fire({
+        title: 'Estas Seguro?',
+        text: "No podras recuperarlo!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Borrar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.projectTypeService.deleteProjectType(_id).subscribe(
+            response =>{
+              this.getCategories();
+            }
+            );
+          Swal.fire(
+            'Borrado!',
+            'El Archivo fue borrado.',
+            'success'
+          )
+          this.ngOnInit();
+        }
+      });
+  
+    }
 
 }

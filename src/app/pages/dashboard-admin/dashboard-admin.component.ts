@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Project } from 'src/app/models/project';
 import { User } from 'src/app/models/user';
-import { BusquedasService } from 'src/app/services/busqueda.service';
-import { ProfileService } from 'src/app/services/profile.service';
+import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./dashboard-admin.component.css']
 })
 export class DashboardAdminComponent implements OnInit {
-  @Input() projectSeleccionado:Project;
+  @Input() projects: Project[] = [];
 
   title = 'Panel Administrativo';
   public user: User;
@@ -29,12 +28,13 @@ export class DashboardAdminComponent implements OnInit {
   usuario: User;
   query:string ='';
   selectedProject:string;
+  projectSeleccionado:Project;
 
   constructor(
     private userService: UserService,
-    private activatedRoute: ActivatedRoute,
-    private busquedasService: BusquedasService,
-    private profileService: ProfileService,
+    private projectService: ProjectService,
+    
+
   ) {
     this.user = userService.usuario;
   }
@@ -43,7 +43,14 @@ export class DashboardAdminComponent implements OnInit {
 
     this.closeMenu();
     this.getUser();
+    this.getProjectsData();
     window.scrollTo(0,0);
+  }
+
+  getProjectsData(){
+    this.projectService.getProjects().subscribe((resp:any)=>{
+      this.projects = resp;
+    })
   }
 
   closeMenu(){
@@ -79,5 +86,4 @@ export class DashboardAdminComponent implements OnInit {
     this.selectedProject = null;
   }
   
-
 }

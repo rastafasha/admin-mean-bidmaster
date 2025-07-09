@@ -8,20 +8,20 @@ import Chart from 'chart.js/auto';
 })
 export class PieChart2Component implements OnChanges {
   public chart: Chart;
-  @Input() payments: any[];
+  isLoading:boolean = false;
+  @Input() projects: any[];
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['payments'] && this.payments) {
+    if (changes['projects'] && this.projects) {
       this.updateChart();
     }
   }
 
   updateChart() {
-    const paidCount = this.payments.filter(p => p.status_deuda !== 'DEUDA').length;
-    const debtCount = this.payments.filter(p => p.status_deuda === 'DEUDA').length;
-
+    const paidCount = this.projects.filter(p => p.hasPresentation !== true).length;
+    const debtCount = this.projects.filter(p => p.hasPresentation === false).length;
     const data = {
-      labels: ['Pagados', 'Pendientes'],
+      labels: ['Con Presentación', 'Sin Presentación'],
       datasets: [
         {
           label: 'Comportamiento',
@@ -38,6 +38,7 @@ export class PieChart2Component implements OnChanges {
         }
       ]
     };
+    
 
     if (this.chart) {
       this.chart.data = data;
@@ -65,5 +66,6 @@ export class PieChart2Component implements OnChanges {
         },
       });
     }
+    
   }
 }
