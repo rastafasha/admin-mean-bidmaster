@@ -22,10 +22,10 @@
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <label>Subir PDF<span class="required">*</span></label>
-                                <input type="file" class="cz-file-drop-input" (change)="cambiarImagen($event)">
+                                <input type="file" class="cz-file-drop-input" (change)="cambiarImagen($event.target.files[0])">
                                 <br>
                                 <br>
-                                <button type="button" [disabled]="!imagenSubir" (click)="subirImagen()"
+                                <button type="button" [disabled]="!imagenSubir"  (click)="subirImagen()"
                                     class="btn btn-success waves-effect waves-light m-r-10 ">
                                     <i class="fa fa-save"></i> Cambiar imagen
                                 </button>

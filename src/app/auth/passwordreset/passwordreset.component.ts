@@ -35,7 +35,7 @@ export class PasswordresetComponent implements OnInit {
 
   this.userService.forgotPassword(this.resetpaswordForm.value).subscribe(
     resp =>{
-      console.log(resp);
+      // console.log(resp);
       Swal.fire('Exito!', `Favor revisa tu Correo`, 'success');
     },(error) => {
       Swal.fire('Error', error.error.message, 'error');
