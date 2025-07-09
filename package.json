@@ -6,7 +6,7 @@
         "start": "ng serve",
         "start:dev": "ng serve --port 4203",
         "build": "ng build",
-        "build:adminbidmaster": "ng build --configuration adminbidmaster",
+        "build:bidmasterapp": "ng build --configuration bidmasterapp",
         "start:prod": "ng build && lite-server -p 8081 --baseDir dist/admin-node",
         "watch": "ng build --watch --configuration development",
         "test": "ng test"
@@ -20,7 +20,9 @@
         "@angular/forms": "^14.2.0",
         "@angular/platform-browser": "^14.2.0",
         "@angular/platform-browser-dynamic": "^14.2.0",
+        "@angular/pwa": "^0.5.3",
         "@angular/router": "^14.2.0",
+        "@angular/service-worker": "^14.3.0",
         "@ckeditor/ckeditor5-angular": "^7.0.1",
         "@ckeditor/ckeditor5-build-classic": "^40.0.0",
         "@ckeditor/ckeditor5-build-decoupled-document": "^40.0.0",

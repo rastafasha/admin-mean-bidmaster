@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
-    apiUrl: "https://backend-daniel-node-mongo.vercel.app/api",
-    apiUrlMedia: "https://backend-daniel-node-mongo.vercel.app/api/uploads",
+    apiUrl: "https://https://backend-bidmaster-mean.vercel.app/api",
+    apiUrlMedia: "https://https://backend-bidmaster-mean.vercel.app/api/uploads",
     mediaUrlRemoto: 'https://res.cloudinary.com/dmv6aukai/image/upload/v1741275492/articlesApp/uploads',
     
     //pluggins

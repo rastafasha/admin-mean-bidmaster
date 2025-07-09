@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,13 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     AuthModule,
     SharedModule,
     PagesModule,
-    CKEditorModule
+    CKEditorModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     // {

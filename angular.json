@@ -49,16 +49,16 @@
               ],
               "outputHashing": "all"
             },
-            "adminbidmaster": {
-              "outputPath": "dist/adminbidmaster",
+            "bidmasterapp": {
+              "outputPath": "dist/bidmasterapp",
               "index": {
-                "input": "src/env/adminbidmaster/index.html",
+                "input": "src/env/bidmasterapp/index.html",
                 "output": "index.html"
               },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.adminbidmaster.ts"
+                  "with": "src/environments/environment.bidmasterapp.ts"
                 }
               ],
               "assets": [
