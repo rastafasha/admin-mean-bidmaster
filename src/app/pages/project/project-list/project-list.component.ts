@@ -57,7 +57,7 @@ export class ProjectListComponent implements OnInit {
       })
 
 
-   if(this.usuario.role === 'PARTNER' || this.usuario.role === 'USER'){
+   if(this.usuario.role === 'PARTNER' ){
     // this.usuario.uid = this.usuario_id;
      this.getProjectsByUser(this.usuario.uid);
      
