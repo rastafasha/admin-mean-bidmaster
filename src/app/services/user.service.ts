@@ -61,6 +61,18 @@ export class UserService {
   }
 
 
+    getLocalStorage(){
+      if(localStorage.getItem('token') && localStorage.getItem('user')){
+        let USER = localStorage.getItem('user');
+        this.usuario = JSON.parse(USER ? USER: '');
+        // this.router.navigateByUrl('/start-meet');
+      }else{
+        this.usuario = null;
+        // this.router.navigateByUrl('/login');
+      }
+    }
+
+
   googleInit(){
 
     return new Promise<void>((resolve) =>{

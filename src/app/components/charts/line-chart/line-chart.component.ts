@@ -14,7 +14,7 @@ export class LineChartComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     setTimeout(()=>{
-      console.log('LineChartComponent ngOnChanges projects:', this.projects);
+      // console.log('LineChartComponent ngOnChanges projects:', this.projects);
     if (changes['projects'] && this.projects && this.projects.length > 0) {
       this.createChart();
     }
@@ -22,7 +22,7 @@ export class LineChartComponent implements OnChanges {
   }
 
   createChart() {
-    console.log('LineChartComponent createChart projects:', this.projects);
+    // console.log('LineChartComponent createChart projects:', this.projects);
 
     const labels = [
       'Enero',

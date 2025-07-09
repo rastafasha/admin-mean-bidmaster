@@ -47,6 +47,14 @@ export class ProjectService {
           map((resp:{ok: boolean, project: Project}) => resp.project)
           );
     }
+
+     getByUser(usuario:any) {
+        const url = `${baseUrl}/projects/user/${usuario}`;
+        return this.http.get<any>(url,this.headers)
+          .pipe(
+            map((resp:{ok: boolean, projects: Project}) => resp.projects)
+          )
+      }
  
   
   

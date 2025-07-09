@@ -12,6 +12,8 @@ export class DashboardUserComponent implements OnInit {
   title = 'Admin Usuario';
   public user: User;
   public userprofile: User;
+  displaycomponent: string = 'none';
+  limit = 3;
 
   error: string;
 

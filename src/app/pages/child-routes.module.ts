@@ -39,6 +39,7 @@ const childRoutes: Routes = [
     { path: 'category/edit/:id', component: CategoryEditComponent, data:{title:'Editar Categoria'} },
     
     { path: 'projects', component: ProjectListComponent, data:{title:'Proyecto'} },
+    { path: 'projects/:id', component: ProjectListComponent, data:{title:'Proyecto'} },
     { path: 'project/crear', component: ProjectEditComponent, data:{title:'Crear Proyecto'} },
     { path: 'project/edit/:id', component: ProjectEditComponent, data:{title:'Editar Proyecto'} },
 

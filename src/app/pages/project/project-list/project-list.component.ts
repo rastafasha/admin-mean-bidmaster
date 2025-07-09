@@ -1,8 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Project, ProjectType } from 'src/app/models/project';
+import { User } from 'src/app/models/user';
 import { BusquedasService } from 'src/app/services/busqueda.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { ProjecttypeService } from 'src/app/services/projecttype.service';
+import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,33 +16,71 @@ import Swal from 'sweetalert2';
 export class ProjectListComponent implements OnInit {
  @Input() displaycomponent: string = 'block';
  @Input() limit!:number;
+ @Input() userprofile!:User;
+
+ 
+
+
   title:string = 'Projectos';
-  projects: Project;
+  projects: Project[];
   query:string = '';
   p: number = 1;
-  count: number = 8;
+  count: number = 5;
   loading:boolean = false;
-  categories: ProjectType;
-
+  categories: ProjectType[];
   selectedProject: Project;
+  usuario:any;
+  usuario_id:any;
 
   constructor(
     private projectService: ProjectService,
     private busquedasService: BusquedasService,
     private proyectTypeService: ProjecttypeService,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute,
 
-  ) { }
+  ) { 
+    let USER = localStorage.getItem('user');
+        this.usuario = JSON.parse(USER ? USER: '');
+  }
 
-  ngOnInit(): void {
-    this.getProjects();
+  
+
+  ngOnInit(): void {debugger
     this.getCategories();
+    this.activatedRoute.params.subscribe((resp:any)=>{
+        this.usuario_id = resp.id;
+        // this.cargarPresupuesto();
+        if(this.usuario_id ){
+          this.getProjectsByUser(this.usuario_id);
+        }
+      })
+
+
+   if(this.usuario.role === 'PARTNER' || this.usuario.role === 'USER'){
+    // this.usuario.uid = this.usuario_id;
+     this.getProjectsByUser(this.usuario.uid);
+     
+  } else {
+       this.getProjects();
+     }
+    
   }
 
   getProjects(){
     this.loading = true;
     this.projectService.getProjects().subscribe((resp:any)=>{
       this.projects = resp;
-      // console.log(resp);
+      this.loading = false;
+    })
+  }
+
+  getProjectsByUser(id:string){
+    //  this.userprofile.uid = this.usuario_id
+    // console.log('getProjectsByUser called with userprofile:', this.userprofile.uid);
+    this.loading = true;
+    this.projectService.getByUser(id).subscribe((resp:any)=>{
+      this.projects = resp;
       this.loading = false;
     })
   }
@@ -56,7 +97,6 @@ export class ProjectListComponent implements OnInit {
   }
   onDeleteProject(project: Project) {
     this.selectedProject = project;
-
 
     Swal.fire({
             title: 'Estas Seguro?',

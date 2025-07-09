@@ -2,19 +2,17 @@
 <div class="container " id="main" class="main" role="main" style="height: calc(74vh);">
 
     <!-- Page Title -->
-    <div class="pagetitle animated fadeIn">
+    <div class="pagetitle animated fadeIn mb-3">
         <div class="left">
-
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a routerLink="/"><i class="fa fa-home"></i> Inicio</a></li>
-                    <li class="breadcrumb-item active" *ngIf="user.role === 'PARTNER'"> Socio</li>
-                    <li class="breadcrumb-item active" *ngIf="user.role === 'USER'"> Invitado</li>
+                    <!-- <li class="breadcrumb-item active" *ngIf="user.role === 'PARTNER'">Admin Socio</li> -->
+                    <!-- <li class="breadcrumb-item active" *ngIf="user.role === 'USER'">Admin Invitado</li> -->
                 </ol>
             </nav>
         </div>
         <div class="right shadow animated fadeIn">
-
             <p>Bienvenido: </p>
             <span class="badge bg-success" *ngIf="user.role === 'PARTNER'">Socio</span>
             <span class="badge bg-danger" *ngIf="user.role === 'USER'">Invitado</span>
@@ -65,7 +63,7 @@
                         <div *ngIf="userprofile.directories.image">
                             <img [src]="userprofile.directories[0].image | imagenPipe: 'users'" [alt]="user.username" class="rounded-circle">
                         </div> -->
-                        <h2>{{user.username}}</h2>
+                        <h2>Hola, {{user.username}}!</h2>
 
                         <p>Usuario desde:<br>{{user.createdAt | date:'MMM d, y, h:mm:ss a'}}</p>
 
@@ -127,6 +125,8 @@
 
             </div>
         </div>
+        <app-project-list [displaycomponent]="displaycomponent" [limit]="limit" [userprofile]="user"></app-project-list>
+        
     </section>
 
 
