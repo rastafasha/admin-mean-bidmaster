@@ -11,8 +11,8 @@ export const environment = {
   mediaUrlRemoto: 'https://res.cloudinary.com/dmv6aukai/image/upload/v1741275492/articlesApp/uploads',
   // apiUrlMedia: 'https://https://backend-bidmaster-mean.vercel.app/api/uploads',
   //remoto
-  apiUrl: "https://https://backend-bidmaster-mean.vercel.app//api",
-  apiUrlMedia: "https://https://backend-bidmaster-mean.vercel.app//api/uploads/",
+  apiUrl: "https://backend-bidmaster-mean.vercel.app/api",
+  apiUrlMedia: "https://backend-bidmaster-mean.vercel.app/api/uploads/",
 
   clientSandboxId: 'AXlazeNsZ0CmjfJIronSzcqzw4hLHkcoVEM5fO5BY7AbD-_GhKoKezRcavq6-T4kQuRqaTXFB_VXmheG',
   clientId: '',
