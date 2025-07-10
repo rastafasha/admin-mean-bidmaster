@@ -70,12 +70,12 @@
                                             <th>OP</th>
                                         </tr>
                                     </thead>
-                                    <tbody *ngFor="let category of categories">
-                                        <tr>
+                                    <tbody  style="overflow: hidden;  overflow-y: scroll; height: 220px;">
+                                        <tr *ngFor="let category of categories">
                                             <td style="font-size: 13px;">{{category.name}}</td>
                                             <td class="text-nowrap text-center">
 
-                                                <a [routerLink]="['/dashboard/category/edit', category._id]" class="cursor" data-toggle="tooltip" data-original-title="Edit">
+                                                <a [style.display]="displaycomponent" [routerLink]="['/dashboard/category/edit', category._id]" class="cursor" data-toggle="tooltip" data-original-title="Edit">
                                                     <i class="fa fa-edit text-success" style="font-size: 18px;"></i>
                                                 </a>
                                                 <a (click)="eliminarCategory(category._id)" class="cursor" data-toggle="tooltip" data-original-title="Borrar">

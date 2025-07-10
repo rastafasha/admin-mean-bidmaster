@@ -18,8 +18,7 @@ export class ProjectListComponent implements OnInit {
  @Input() limit!:number;
  @Input() userprofile!:User;
 
- 
-
+  selectedType: string = '';
 
   title:string = 'Projectos';
   projects: Project[];
@@ -46,7 +45,7 @@ export class ProjectListComponent implements OnInit {
 
   
 
-  ngOnInit(): void {debugger
+  ngOnInit(): void {
     this.getCategories();
     this.activatedRoute.params.subscribe((resp:any)=>{
         this.usuario_id = resp.id;
@@ -123,16 +122,22 @@ export class ProjectListComponent implements OnInit {
   }
 
   search(){
-    this.loading = true
-     if(!this.query|| this.query === null){
+    if ((!this.query || this.query === null) && !this.selectedType) {
       this.ngOnInit();
-    }else{
+    } else {
+
+      
       return this.busquedasService.searchGlobal(this.query).subscribe(
-        (resp:any) => {
-          this.projects = resp.projects;
-      this.loading = false;
+        (resp: any) => {
+          let filteredProjects = resp.projects;
+          if (this.selectedType) {
+            filteredProjects = filteredProjects.filter(
+              (project: Project) => project.type.name === this.selectedType
+            );
+          }
+          this.projects = filteredProjects;
         }
-      )
+      );
     }
   }
 
@@ -143,7 +148,7 @@ export class ProjectListComponent implements OnInit {
   PageSize(){
     this.getProjects();
     this.query = '';
-    this.categories = null;
+    this.selectedType = '';
     this.getCategories()
     
   }
@@ -151,4 +156,5 @@ export class ProjectListComponent implements OnInit {
     this.selectedProject = null;
   }
 
-}
+   }
+

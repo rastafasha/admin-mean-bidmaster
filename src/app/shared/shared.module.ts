@@ -19,6 +19,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { SearchComponent } from './search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from './loading/loading.component';
+import { BackButtnComponent } from './backButtn/backButtn.component';
 
 
 
@@ -39,7 +40,8 @@ declarations: [
     MenuiconosComponent,
     BannerplanesComponent,
     SearchComponent,
-    LoadingComponent
+    LoadingComponent,
+    BackButtnComponent,
 ],
 exports: [
     HeaderComponent,
@@ -50,7 +52,8 @@ exports: [
     SearchComponent,
     ReactiveFormsModule,
     FormsModule,
-    LoadingComponent
+    LoadingComponent,
+    BackButtnComponent,
 ]
 })
 export class SharedModule { }

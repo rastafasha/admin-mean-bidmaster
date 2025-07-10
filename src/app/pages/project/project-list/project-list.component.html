@@ -1,25 +1,9 @@
 <!-- =======| Main |======= -->
 <div class="container animated fadeInUp" id="main" class="main" role="main" name="users">
 
-    <div class="col-xs-12">
-        <div class="leftside" [style.display]="displaycomponent">
-            <!-- Page Title -->
-            <div class="pagetitle">
-                <h1><i class="bx bxs-user-account"></i> {{title}}</h1>
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a routerLink="/"><i class="fa fa-home"></i> Inicio</a></li>
-                        <!-- <li class="breadcrumb-item"><a routerLink="/dashboard/configuraciones">Configuraciones</a></li> -->
-                        <li class="breadcrumb-item active">{{title}}</li>
-                    </ol>
-                </nav>
-            </div>
-            <!-- End Page Title -->
-            <div class="buton">
-                <button class="btn btn-outline-danger pull-right" href="javascript:void(0)"
-                    (click)="goBack()">Volver</button>
-            </div>
-        </div>
+    <div class="col-xs-12" >
+        
+        <app-backButtn [displaycomponent]="displaycomponent" [title]="title"></app-backButtn>
 
         <div class="clear"></div>
 
@@ -34,39 +18,40 @@
                         <form class="form-horizontal ">
                             <div
                                 class="p-1 bg-light rounded rounded-pill shadow-sm mb-4 d-flex justify-content-center gap-3">
-                                <div class="input-group">
-                                    <input type="search" name="search" type="text" class="form-control col-xs-12"
-                                        placeholder="Buscar Project" aria-describedby="button-addon1" [(ngModel)]="query"
-                                        class="form-control border-0 bg-light" />
-                                    <div class="input-group-append">
+                                <div class="input-group busc">
+                                    <input type="search" name="search" type="text" class="form-control inputb "
+                                        placeholder="Buscar Project" aria-describedby="button-addon1"
+                                        [(ngModel)]="query" class="form-control border-0 bg-light" />
+
+                                    <select class="form-control selecttyp" [(ngModel)]="selectedType" name="type" (change)="search()">
+                                        <option value="">Seleccione</option>
+                                        <option *ngFor="let data of categories" [value]="data.name">
+                                            {{data.name}}
+                                        </option>
+                                    </select>
+                                   
+                                    <div class="input-group-append ">
                                         <button id="button-addon1" type="submit" class="btn btn-link text-primary"
                                             (click)="search()" name="submit" data-toggle="tooltip"
                                             title="mostrar todos">
                                             <i class="fa fa-search"></i>
                                         </button>
                                         <a href="javascript:;" (click)="PageSize()"
-                                            class="btn btn-primary doctor-refresh ms-2"><i
+                                            class="btn btn-primary doctor-refresh ms-2 "><i
                                                 class="fa fa-refresh"></i></a>
                                     </div>
 
 
                                 </div>
-                                <div class="input-group">
-                                    <select class="form-control" formControlName="type">
-                                        <option value="">Seleccione</option>
-                                        <option *ngFor="let data of categories" [value]="data.name">
-                                            {{data.name}}
-                                        </option>
-                                    </select>
-                                </div>
+                                
                             </div>
                         </form>
                         <!-- buscador -->
                     </div>
                     <div class="col-xs-1 col-sm-1" [style.display]="displaycomponent">
                         <div class="text-right">
-                            <button class="btn btn-primary" (click)="openEditModal()"  href="javascript:void(0)" data-bs-toggle="modal"
-                                data-bs-target="#editProject">
+                            <button class="btn btn-primary" (click)="openEditModal()" href="javascript:void(0)"
+                                data-bs-toggle="modal" data-bs-target="#editProject">
                                 <i class="fa fa-pencil"></i>
                                 Crear
                             </button>
@@ -78,22 +63,18 @@
 
 
                 <div class="card recent-sales overflow-auto" *ngIf="!loading">
-
-
                     <div class="card-body">
-
                         <div class="contenido">
                             <div class="item " *ngFor="let project of projects | slice: 0: limit">
-<app-projectitem [project]="project" (onEditProject)="onEditProject($event)"
-(onDelete)="onDeleteProject($event)"
-></app-projectitem>
+                                <app-projectitem [project]="project" (onEditProject)="onEditProject($event)"
+                                    (onDelete)="onDeleteProject($event)"></app-projectitem>
                             </div>
-<app-project-edit [projectSeleccionado]="selectedProject" (refreshProjectList)="getProjects()"></app-project-edit>
+                            <app-project-edit [projectSeleccionado]="selectedProject"
+                                (refreshProjectList)="getProjects()"></app-project-edit>
                         </div>
 
-
-
-                        <pagination-controls (pageChange)="p = $event" [style.display]="displaycomponent"></pagination-controls>
+                        <pagination-controls (pageChange)="p = $event"
+                            [style.display]="displaycomponent"></pagination-controls>
 
                     </div>
 
@@ -106,4 +87,3 @@
 
 </div>
 <!--/main-->
-
