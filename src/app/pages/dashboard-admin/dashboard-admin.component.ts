@@ -27,7 +27,7 @@ export class DashboardAdminComponent implements OnInit {
   usuarios: User;
   usuario: User;
   query:string ='';
-  selectedProject:string;
+  selectedProject:Project;
   projectSeleccionado:Project;
 
   constructor(
@@ -44,6 +44,7 @@ export class DashboardAdminComponent implements OnInit {
     this.closeMenu();
     this.getUser();
     this.getProjectsData();
+    this.subscribeToFilteredProjects();
     window.scrollTo(0,0);
   }
 
@@ -51,6 +52,23 @@ export class DashboardAdminComponent implements OnInit {
     this.projectService.getProjects().subscribe((resp:any)=>{
       this.projects = resp;
     })
+  }
+
+  onEditProject(project: Project) {
+    this.selectedProject = project;
+  }
+  onDeleteProject(project: Project) {
+    this.selectedProject = project;
+  }
+
+  subscribeToFilteredProjects() {
+    this.projectService.filteredProjects$.subscribe((filteredProjects: Project[]) => {
+      if (filteredProjects && filteredProjects.length > 0) {
+        this.projects = filteredProjects;
+      } else {
+        this.getProjectsData();
+      }
+    });
   }
 
   closeMenu(){

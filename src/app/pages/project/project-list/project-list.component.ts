@@ -125,8 +125,6 @@ export class ProjectListComponent implements OnInit {
     if ((!this.query || this.query === null) && !this.selectedType) {
       this.ngOnInit();
     } else {
-
-      
       return this.busquedasService.searchGlobal(this.query).subscribe(
         (resp: any) => {
           let filteredProjects = resp.projects;
@@ -136,6 +134,7 @@ export class ProjectListComponent implements OnInit {
             );
           }
           this.projects = filteredProjects;
+          this.projectService.emitFilteredProjects(filteredProjects);
         }
       );
     }
