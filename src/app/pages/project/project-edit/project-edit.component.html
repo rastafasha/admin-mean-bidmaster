@@ -1,0 +1,92 @@
+<div class="modal fade" id="editProject" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="projectModalLabel">{{title}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+
+<form *ngIf="projectForm" class="form-horizontal form-material" (ngSubmit)="handleSubmit()" [formGroup]="projectForm">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <label>Nombre del Proyecto <span class="required">*</span></label>
+                                <input type="text" formControlName="name" class="form-control" required>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>URL del Proyecto<span class="required">*</span></label>
+                                <input type="text" formControlName="url" class="form-control" required>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>Subir PDF<span class="required">*</span></label>
+                                <input type="file" class="cz-file-drop-input" (change)="cambiarImagen($event.target.files[0])">
+                                <br>
+                                <br>
+                                <button type="button" [disabled]="!imagenSubir"  (click)="subirImagen()"
+                                    class="btn btn-success waves-effect waves-light m-r-10 ">
+                                    <i class="fa fa-save"></i> Cambiar imagen
+                                </button>
+
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 ">
+                                <label>Tipo de Proyecto<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <select class="form-control" formControlName="type">
+                                        <option value="">Seleccione</option>
+                                        <option *ngFor="let data of categorias" [value]="data.name">
+                                            {{data.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-12 col-md-6">
+                                <label>Fecha de entrga<span class="required">*</span></label>
+                                <input type="date" formControlName="deliveryDate" class="form-control" required>
+
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <label>Asociados<span class="required">*</span></label>
+                                <div class="input-group">
+
+                                    <ng-container formArrayName="partners" *ngIf="partners && partners.length > 0">
+                                        <div *ngFor="let partnerCtrl of projectForm.get('partners').controls; let i = index"
+                                            class="form-check">
+                                            <input class="form-check-input" type="checkbox" [formControlName]="i"
+                                                [id]="'partnerCheckbox' + i" [value]="partners[i].username" />
+                                            <label class="form-check-label" [for]="'partnerCheckbox' + i">{{
+                                                partners[i].username }}</label>
+                                        </div>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" formControlName="hasPresentation" type="checkbox"
+                                        id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        ¿Tiene presentación lista para enviar?
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+<button class="btn btn-outline-success waves-effect waves-light m-r-10" type="submit">Guardar</button>
+
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
