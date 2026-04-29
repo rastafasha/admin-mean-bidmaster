@@ -1,5 +1,5 @@
 import { environment } from "src/environments/environment";
-const base_url = environment.mediaUrlRemoto;
+const base_url = environment.apiUrl;
 
 export class Banner {
   constructor(
