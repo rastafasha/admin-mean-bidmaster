@@ -101,10 +101,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "admin-bidmasterapp:build:production"
+              "buildTarget": "admin-bidmasterapp:build:production"
             },
             "development": {
-              "browserTarget": "admin-bidmasterapp:build:development"
+              "buildTarget": "admin-bidmasterapp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -112,7 +112,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "admin-bidmasterapp:build"
+            "buildTarget": "admin-bidmasterapp:build"
           }
         },
         "test": {
