@@ -48,8 +48,6 @@ const childRoutes: Routes = [
     { path: 'users', component: UsersComponent, data:{title:'Usuarios'} },
     { path: 'user/:id', component: UserProfileComponent, data:{title:'Detalle Usuario'} },
     { path: 'user/edit/:id', component: UserProfileComponent, data:{title:'Editar Usuario'} },
-    // { path: 'condiciones/:id', component: CondicionesComponent, data:{title:'Editar Usuario'} },
-    // { path: 'user/edit/:id', component: UserDetailsComponent, data:{title:'Editar Usuario'} },
     { path: 'profile/:id',  component: ProfileComponent, data:{title:'Perfil'} },
 
     { path: 'search/:searchItem', component: UsersComponent, data:{title:'Buscar'} },

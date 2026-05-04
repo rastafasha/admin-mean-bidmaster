@@ -31,6 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
           // 1. Borramos el token para evitar bucles
           localStorage.removeItem('token');
+          localStorage.removeItem('dark');
           localStorage.removeItem('user'); // Si guardas el usuario, bórralo también
 
           // 2. Opcional: Mostrar un mensaje antes de redirigir
