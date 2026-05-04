@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 //helpers
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import {PagesComponent} from './pages.component';
@@ -40,51 +40,45 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ProjectModule } from './project/project.module';
 // import { CursosModule } from './cursos/cursos.module';
 
-@NgModule({
-  declarations: [
-    DashboardComponent,
-    DashboardAdminComponent,
-    PagesComponent,
-    ProfileComponent,
-    UsersComponent,
-    HelpComponent,
-    ContactComponent,
-    DashboardUserComponent,
-    PagesComponent,
-    UserProfileComponent,
-    BusquedaComponent
-  ],
-  exports: [
-    DashboardComponent,
-    DashboardAdminComponent,
-    PagesComponent,
-    ProfileComponent,
-    UsersComponent,
-    HelpComponent,
-    ContactComponent,
-    DashboardUserComponent,
-    PagesComponent,
-    UserProfileComponent,
-    BusquedaComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterModule,
-    HttpClientModule,
-    PipesModule,
-    ConfModule,
-    ComponentsModule,
-    // CursosModule,
-    NgxPaginationModule,
-    CKEditorModule,
-    ProjectModule
-    // AngularFileUploaderModule,
-
-  ],
-  providers: [
-  ],
-})
+@NgModule({ declarations: [
+        DashboardComponent,
+        DashboardAdminComponent,
+        PagesComponent,
+        ProfileComponent,
+        UsersComponent,
+        HelpComponent,
+        ContactComponent,
+        DashboardUserComponent,
+        PagesComponent,
+        UserProfileComponent,
+        BusquedaComponent
+    ],
+    exports: [
+        DashboardComponent,
+        DashboardAdminComponent,
+        PagesComponent,
+        ProfileComponent,
+        UsersComponent,
+        HelpComponent,
+        ContactComponent,
+        DashboardUserComponent,
+        PagesComponent,
+        UserProfileComponent,
+        BusquedaComponent
+    ], imports: [CommonModule,
+        SharedModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterModule,
+        PipesModule,
+        ConfModule,
+        ComponentsModule,
+        // CursosModule,
+        NgxPaginationModule,
+        CKEditorModule,
+        ProjectModule
+        // AngularFileUploaderModule,
+    ], providers: [
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class PagesModule { }
