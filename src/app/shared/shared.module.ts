@@ -20,6 +20,7 @@ import { SearchComponent } from './search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from './loading/loading.component';
 import { BackButtnComponent } from './backButtn/backButtn.component';
+import { PwaNotifInstallerComponent } from './pwa-notif-installer/pwa-notif-installer.component';
 
 
 
@@ -42,6 +43,7 @@ declarations: [
     SearchComponent,
     LoadingComponent,
     BackButtnComponent,
+    PwaNotifInstallerComponent
 ],
 exports: [
     HeaderComponent,
@@ -54,6 +56,7 @@ exports: [
     FormsModule,
     LoadingComponent,
     BackButtnComponent,
+    PwaNotifInstallerComponent
 ]
 })
 export class SharedModule { }
