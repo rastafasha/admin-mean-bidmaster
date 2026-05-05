@@ -12,9 +12,10 @@ import { ProjectType } from 'src/app/models/project';
 import { ProjecttypeService } from 'src/app/services/projecttype.service';
 
 @Component({
-  selector: 'app-category-edit',
-  templateUrl: './category-edit.component.html',
-  styleUrls: ['./category-edit.component.css']
+    selector: 'app-category-edit',
+    templateUrl: './category-edit.component.html',
+    styleUrls: ['./category-edit.component.css'],
+    standalone: false
 })
 export class CategoryEditComponent implements OnInit {
 
@@ -110,7 +111,7 @@ export class CategoryEditComponent implements OnInit {
       //crear
       this.projectTypeService.createProjectType(this.categoryForm.value)
       .subscribe( (resp: any) =>{
-        Swal.fire('Creado', `${name} creado correctamente`, 'success');
+        Swal.fire('Creado', `creado correctamente`, 'success');
         // this.router.navigateByUrl(`/dashboard/categories`);
         // this.enviarNotificacion();
         this.getCategories();

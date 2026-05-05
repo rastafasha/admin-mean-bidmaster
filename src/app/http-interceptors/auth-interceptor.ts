@@ -11,54 +11,51 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let headers = new HttpHeaders();
-      let params = req.params;
-      if (localStorage.getItem('auth_token')) {
-        headers = headers.append('Accept', 'application/json')
-          .append('Authorization', 'Bearer ' + localStorage.getItem('auth_token'));
-      } else {
-        headers = headers.append('Accept', 'application/json');
-        // params = params.append('page', '1');
-      }
+  // En tu AuthInterceptor
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    // 1. CAMBIO: Leer 'token' en lugar de 'auth_token'
+    const token = localStorage.getItem('token');
+
+    let headers = new HttpHeaders().set('Accept', 'application/json');
+
+    if (token) {
+      // 2. IMPORTANTE: Verifica si tu backend espera 'Bearer' o 'x-token'
+      // Si tu backend usa el middleware que revisamos antes, debería ser:
+      headers = headers.set('x-token', token);
+
+      // O si usa el estándar Bearer:
+      // headers = headers.set('Authorization', 'Bearer ' + token);
+    }
 
     return next.handle(req.clone({ headers })).pipe(
       catchError((error: HttpErrorResponse) => {
-
-        // 401: Token vencido o inválido
-        // 403: No tienes permisos
         if (error.status === 401 || error.status === 403) {
 
-          // 1. Borramos el token para evitar bucles
+          // 3. Limpieza consistente con lo que guardas
           localStorage.removeItem('token');
-          localStorage.removeItem('dark');
-          localStorage.removeItem('user'); // Si guardas el usuario, bórralo también
+          localStorage.removeItem('user');
 
-          // 2. Opcional: Mostrar un mensaje antes de redirigir
-          // Usamos SweetAlert2 o un alert simple para avisar
           Swal.fire({
             title: 'Sesión expirada',
-            text: 'Tu sesión ha vencido, por favor inicia sesión nuevamente.',
+            text: 'Tu sesión ha vencido o no tienes permisos.',
             icon: 'warning',
             confirmButtonText: 'Ir al Login'
           }).then(() => {
-            // 3. Redirigir al login
             this._router.navigate(['/login']);
           });
-
-
         }
-
         return throwError(() => error);
       })
     );
   }
 
-    errors(error: HttpErrorResponse) {
-      if (error.status === 4030 || error.status === 4040 || error.status === 4230) {
-        this._router.navigate(['/login']);
-      }
-      return throwError(error);
+
+  errors(error: HttpErrorResponse) {
+    if (error.status === 4030 || error.status === 4040 || error.status === 4230) {
+      this._router.navigate(['/login']);
     }
+    return throwError(error);
+  }
 }
 

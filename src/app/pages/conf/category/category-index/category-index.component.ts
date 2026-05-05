@@ -14,9 +14,10 @@ import { ProjecttypeService } from 'src/app/services/projecttype.service';
 
 
 @Component({
-  selector: 'app-category-index',
-  templateUrl: './category-index.component.html',
-  styleUrls: ['./category-index.component.css']
+    selector: 'app-category-index',
+    templateUrl: './category-index.component.html',
+    styleUrls: ['./category-index.component.css'],
+    standalone: false
 })
 export class CategoryIndexComponent implements OnInit {
 

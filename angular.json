@@ -11,12 +11,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/admin-bidmasterapp",
+            "outputPath": {
+              "base": "dist/admin-bidmasterapp"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -26,7 +29,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -51,7 +55,9 @@
               "outputHashing": "all"
             },
             "bidmasterapp": {
-              "outputPath": "dist/bidmasterapp",
+              "outputPath": {
+                "base": "dist/bidmasterapp"
+              },
               "index": {
                 "input": "src/env/bidmasterapp/index.html",
                 "output": "index.html"
@@ -87,9 +93,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -101,10 +105,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "admin-bidmasterapp:build:production"
+              "buildTarget": "admin-bidmasterapp:build:production"
             },
             "development": {
-              "browserTarget": "admin-bidmasterapp:build:development"
+              "buildTarget": "admin-bidmasterapp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -112,7 +116,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "admin-bidmasterapp:build"
+            "buildTarget": "admin-bidmasterapp:build"
           }
         },
         "test": {

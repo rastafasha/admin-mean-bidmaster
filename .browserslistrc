@@ -13,11 +13,13 @@ last 2 Chrome versions
 last 2 Firefox versions
 last 2 Edge versions
 
-# SOPORTE PARA iPHONE 6s (iOS 15)
-iOS >= 12
-Safari >= 12
-last 5 iOS major versions
+# SOPORTE PARA iPHONE 6s (Actualizado a iOS 15)
+# Eliminamos iOS 12 y Safari 12 que causan el error
+iOS >= 15
+Safari >= 15
+last 2 iOS major versions
 
 # Evitar versiones muertas
 not dead
 not IE 11
+

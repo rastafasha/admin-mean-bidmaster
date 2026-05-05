@@ -6,7 +6,8 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-newpassword',
   templateUrl: './newpassword.component.html',
-  styleUrls: ['./newpassword.component.css']
+  styleUrls: ['./newpassword.component.css'],
+  standalone: false
 })
 export class NewpasswordComponent implements OnInit {
   password = new FormControl();
@@ -16,72 +17,74 @@ export class NewpasswordComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = null;
-  errors:any = null;
-
+  errors: any = null;
+  passwordForm: FormGroup;
   public formSumitted = false;
 
-  public passwordForm = this.fb.group({
-    email: [ null, [Validators.required] ],
-    password: [null, Validators.required],
-    password2: [null, Validators.required],
-    resetToken: [null],
 
-  }, {
-    validators: this.passwordsIguales('password', 'password2')
-
-  });
   constructor(
     private router: Router,
     private activatedRouter: ActivatedRoute,
     private fb: FormBuilder,
     private userService: UserService,
   ) {
-    activatedRouter.queryParams.subscribe(params=>{
+    activatedRouter.queryParams.subscribe(params => {
       this.resetToken = params['auth_token'];
     })
+
+    this.passwordForm = this.fb.group({
+      email: [null, [Validators.required]],
+      password: [null, Validators.required],
+      password2: [null, Validators.required],
+      resetToken: [null],
+
+    }, {
+      validators: this.passwordsIguales('password', 'password2')
+
+    });
   }
 
   ngOnInit(): void {
   }
 
 
-passwordNoValido(){
-  const pass1 = this.passwordForm.get('password').value;
-  const pass2 = this.passwordForm.get('password2').value;
+  passwordNoValido() {
+    const pass1 = this.passwordForm.get('password').value;
+    const pass2 = this.passwordForm.get('password2').value;
 
-  if((pass1 !== pass2) && this.formSumitted){
-    return true;
-  }else{
-    return false;
-  }
-}
-
-passwordsIguales(pass1Name: string, pass2Name: string){
-  return (formGroup: FormGroup) =>{
-    const pass1Control = formGroup.get(pass1Name);
-    const pass2Control = formGroup.get(pass2Name);
-
-    if(pass1Control.value === pass2Control.value){
-      pass2Control.setErrors(null)
-    }else{
-      pass2Control.setErrors({noEsIgual: true});
+    if ((pass1 !== pass2) && this.formSumitted) {
+      return true;
+    } else {
+      return false;
     }
   }
-}
 
-newPassword(){
+  passwordsIguales(pass1Name: string, pass2Name: string) {
+    return (formGroup: FormGroup) => {
+      const pass1Control = formGroup.get(pass1Name);
+      const pass2Control = formGroup.get(pass2Name);
 
-  this.userService.change_password(this.email, this.passwordForm.value).subscribe(
-    resp =>{
-
-      Swal.fire('Exito!', `Contraseña Actualizada`, 'success');
-      this.router.navigateByUrl('/login');
-    },(error) => {
-      Swal.fire('Error', error.error.message, 'error');
-      this.errors = error.error.message;
+      if (pass1Control.value === pass2Control.value) {
+        pass2Control.setErrors(null)
+      } else {
+        pass2Control.setErrors({ noEsIgual: true });
+      }
     }
+  }
+
+  newPassword() {
+
+    this.userService.change_password(this.email, this.passwordForm.value).subscribe(
+      resp => {
+
+        Swal.fire('Exito!', `Contraseña Actualizada`, 'success');
+        this.router.navigateByUrl('/login');
+      }, (error) => {
+        Swal.fire('Error', error.error.message, 'error');
+        this.errors = error.error.message;
+      }
     )
     // console.log(this.user)
-}
+  }
 
 }

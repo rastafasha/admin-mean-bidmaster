@@ -12,11 +12,8 @@ import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CategoryEditComponent } from './conf/category/category-edit/category-edit.component';
 import { CategoryIndexComponent } from './conf/category/category-index/category-index.component';
-import { BusquedaComponent } from './busqueda/busqueda.component';
 import { ProjectListComponent } from './project/project-list/project-list.component';
 import { ProjectEditComponent } from './project/project-edit/project-edit.component';
-// import { CondicionesComponent } from './condiciones/condiciones.component';
-
 
 
 
@@ -27,8 +24,8 @@ const childRoutes: Routes = [
 
     //configuraciones
     { path: 'configuraciones',  component: ConfiguracionesComponent, data:{title:'Configuraciones'} },
-    { path: 'buscar', component: BusquedaComponent, data:{tituloPage:'Busquedas'} },
-    { path: 'buscar/:termino', component: BusquedaComponent, data:{tituloPage:'Busquedas'} },
+    // { path: 'buscar', component: BusquedaComponent, data:{tituloPage:'Busquedas'} },
+    // { path: 'buscar/:termino', component: BusquedaComponent, data:{tituloPage:'Busquedas'} },
     { path: 'rolesconf', component: RolesViewComponent, data:{title:'Planes'} },
 
 
