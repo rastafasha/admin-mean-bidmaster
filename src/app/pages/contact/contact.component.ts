@@ -7,9 +7,10 @@ import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+    selector: 'app-contact',
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.css'],
+    standalone: false
 })
 export class ContactComponent implements OnInit {
   title = "Contacto"

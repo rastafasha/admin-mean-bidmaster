@@ -43,7 +43,7 @@ export class BusquedasService {
   }
 
   
-  private trasnformarCategorias(resultados: any[]): ProjectType[] {
+  private trasnformarProjectTypes(resultados: any[]): ProjectType[] {
     return resultados;
   }
   private trasnformarProjects(resultados: any[]): Project[] {
@@ -58,10 +58,11 @@ export class BusquedasService {
           case 'usuarios':
             return this.trasnformarUsuarios(resp.resultados);
 
-          case 'projecttypes':
+          case 'projects':
             return this.trasnformarProjects(resp.resultados);
+
           case 'projecttypes':
-            return this.trasnformarCategorias(resp.resultados);
+            return this.trasnformarProjectTypes(resp.resultados);
 
           default:
             return [];

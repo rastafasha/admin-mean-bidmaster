@@ -6,43 +6,45 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-passwordreset',
   templateUrl: './passwordreset.component.html',
-  styleUrls: ['./passwordreset.component.css']
+  styleUrls: ['./passwordreset.component.css'],
+  standalone: false
 })
 export class PasswordresetComponent implements OnInit {
   email = new FormControl();
 
   submitted = false;
-  errors:any = null;
-
+  errors: any = null;
+  resetpaswordForm: FormGroup;
   public formSumitted = false;
-  public resetpaswordForm = this.fb.group({
-    email: [ null, [Validators.required] ],
-    // terminos: [false, Validators.required],
 
-  });
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-  ) { }
+  ) {
+    this.resetpaswordForm = this.fb.group({
+      email: [null, [Validators.required]],
+
+    });
+  }
 
   ngOnInit(): void {
 
   }
 
-  resetPassword(){
+  resetPassword() {
 
-  this.userService.forgotPassword(this.resetpaswordForm.value).subscribe(
-    resp =>{
-      // console.log(resp);
-      Swal.fire('Exito!', `Favor revisa tu Correo`, 'success');
-    },(error) => {
-      Swal.fire('Error', error.error.message, 'error');
-      this.errors = error.error.message;
-    }
+    this.userService.forgotPassword(this.resetpaswordForm.value).subscribe(
+      resp => {
+        // console.log(resp);
+        Swal.fire('Exito!', `Favor revisa tu Correo`, 'success');
+      }, (error) => {
+        Swal.fire('Error', error.error.message, 'error');
+        this.errors = error.error.message;
+      }
     )
     // console.log(this.user)
-}
+  }
 
 }

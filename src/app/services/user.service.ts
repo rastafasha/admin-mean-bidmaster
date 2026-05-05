@@ -51,6 +51,11 @@ export class UserService {
     }
   }
 
+  get usuarioActual() {
+  const userJson = localStorage.getItem('user');
+  return userJson ? JSON.parse(userJson) : null;
+}
+
 
 
   guardarLocalStorage(token: string, user: any){
@@ -58,6 +63,17 @@ export class UserService {
     // localStorage.setItem('user', user);
     localStorage.setItem('user', JSON.stringify(user));
   }
+
+  login(formData){
+    return this.http.post(`${base_url}/auth/login`, formData)
+    .pipe(
+      tap((resp: any) => {
+        this.guardarLocalStorage(resp.token, resp.user);
+      })
+    )
+  }
+
+  
 
 
     getLocalStorage(){
@@ -131,14 +147,7 @@ export class UserService {
     return this.http.put(`${base_url}/usuarios/editar/${user}`,this.headers);
   }
 
-  login(formData){
-    return this.http.post(`${base_url}/auth/login`, formData)
-    .pipe(
-      tap((resp: any) => {
-        this.guardarLocalStorage(resp.token, resp.user);
-      })
-    )
-  }
+  
 
   cargarUsuarios(desde: number = 0){
 

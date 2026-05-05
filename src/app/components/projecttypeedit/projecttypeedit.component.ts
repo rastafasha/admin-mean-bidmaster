@@ -4,9 +4,10 @@ import { ProjectType } from 'src/app/models/project';
 import { ProjecttypeService } from 'src/app/services/projecttype.service';
 
 @Component({
-  selector: 'app-projecttypeedit',
-  templateUrl: './projecttypeedit.component.html',
-  styleUrls: ['./projecttypeedit.component.css']
+    selector: 'app-projecttypeedit',
+    templateUrl: './projecttypeedit.component.html',
+    styleUrls: ['./projecttypeedit.component.css'],
+    standalone: false
 })
 export class ProjecttypeeditComponent implements OnInit {
 

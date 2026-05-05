@@ -15,12 +15,6 @@ import { ConfModule } from './conf/conf.module';
 import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { ComponentsModule } from '../components/components.module';
-
-// paginacion
-//paypal
-// import { NgxPayPalModule } from 'ngx-paypal';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { NgxSpinnerModule } from "ngx-spinner";
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 
 //componentes
@@ -31,14 +25,8 @@ import { HelpComponent } from './help/help.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UsersComponent } from './users/users.component';
-
-// angular file uploader
-// import { AngularFileUploaderModule } from 'angular-file-uploader';
-//Qr
-import { BusquedaComponent } from './busqueda/busqueda.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ProjectModule } from './project/project.module';
-// import { CursosModule } from './cursos/cursos.module';
 
 @NgModule({ declarations: [
         DashboardComponent,
@@ -51,7 +39,6 @@ import { ProjectModule } from './project/project.module';
         DashboardUserComponent,
         PagesComponent,
         UserProfileComponent,
-        BusquedaComponent
     ],
     exports: [
         DashboardComponent,
@@ -64,7 +51,6 @@ import { ProjectModule } from './project/project.module';
         DashboardUserComponent,
         PagesComponent,
         UserProfileComponent,
-        BusquedaComponent
     ], imports: [CommonModule,
         SharedModule,
         ReactiveFormsModule,

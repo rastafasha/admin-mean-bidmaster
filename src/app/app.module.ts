@@ -26,14 +26,15 @@ import { AuthInterceptor } from './http-interceptors/auth-interceptor';
         CKEditorModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
+            // enabled: false,
             // Register the ServiceWorker as soon as the application is stable
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000'
-        })], providers: [
+        })], 
+        providers: [
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
-            // useClass: PaypalInterceptor,
             multi: true
         },
         provideHttpClient(withInterceptorsFromDi())
