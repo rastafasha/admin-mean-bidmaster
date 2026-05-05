@@ -29,9 +29,6 @@ export class UsersComponent implements OnInit {
 
   error: string;
   msm_error: string;
-
-
-  ServerUrl = environment.apiUrl;
   query:string ='';
 
   constructor(
@@ -57,9 +54,11 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(): void {
+    this.loading = true;
     this.userService.getUsuarios().subscribe(
       res =>{
         this.usuarios = res;
+        this.loading = false;
         error => this.error = error;
       }
     );

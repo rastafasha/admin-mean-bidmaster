@@ -56,9 +56,11 @@ export class CategoryIndexComponent implements OnInit {
   }
 
   getCurrencies(): void {
+    this.loading = true;
     this.projectTypeService.getProjectTypes().subscribe(
       res =>{
         this.categorias = res;
+        this.loading = false;
         error => this.error = error
       }
     );
